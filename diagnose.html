@@ -60,3 +60,47 @@
 
 </body>
 </html>
+<section class="symptom-cards">
+    <h1 class="diag-title">Kies je probleem</h1>
+
+    <div class="symptom-grid">
+
+        <div class="symptom-card" onclick="startDiagnosis('Start niet')">
+            <h3>Start niet</h3>
+            <p>Scooter reageert niet of startmotor draait niet.</p>
+        </div>
+
+        <div class="symptom-card" onclick="startDiagnosis('Slaat af bij gas geven')">
+            <h3>Slaat af bij gas geven</h3>
+            <p>Motor valt weg zodra je gas geeft.</p>
+        </div>
+
+        <div class="symptom-card" onclick="startDiagnosis('Loopt slecht stationair')">
+            <h3>Loopt slecht stationair</h3>
+            <p>Onregelmatig of te laag stationair toerental.</p>
+        </div>
+
+        <div class="symptom-card" onclick="startDiagnosis('Rijdt niet harder dan 20–30 km/h')">
+            <h3>Rijdt niet harder dan 20–30 km/h</h3>
+            <p>Beperkte snelheid of weinig vermogen.</p>
+        </div>
+
+        <div class="symptom-card" onclick="startDiagnosis('Tikkend/ratelend geluid')">
+            <h3>Tikkend/ratelend geluid</h3>
+            <p>Mechanisch geluid uit motor of variateur.</p>
+        </div>
+
+        <div class="symptom-card" onclick="startDiagnosis('Rookt extreem')">
+            <h3>Rookt extreem</h3>
+            <p>Veel witte/blauwe rook uit uitlaat.</p>
+        </div>
+
+        <!-- Je kunt ALLE symptomen hier toevoegen -->
+    </div>
+</section>
+
+<!-- Wizard container (verstopt tot gebruiker kiest) -->
+<div id="wizard" class="hidden"></div>
+
+<script src="diagnoseData.js"></script>
+<script src="diagnoseFlow.js"></script>
