@@ -4,64 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fix50 Diagnose</title>
+
+    <!-- Koppel je CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Data + Flow scripts -->
+    <script src="diagnoseData.js" defer></script>
+    <script src="diagnoseflow.js" defer></script>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
     <img src="logo.png" alt="Fix50 Logo">
     <a href="/login">Login</a>
 </header>
 
-<div class="diagnose-container">
-
-    <div class="progress-bar">
-        <div class="progress-fill" id="progress"></div>
-    </div>
-
-    <div id="step1">
-        <h2 class="question">Start de diagnose: Heeft je scooter startproblemen?</h2>
-        <div class="answer-buttons">
-            <button class="answer-btn" onclick="nextStep(2)">Ja</button>
-            <button class="answer-btn" onclick="nextStep(2)">Nee</button>
-        </div>
-    </div>
-
-    <div id="step2" class="hidden">
-        <h2 class="question">Hoor je een klikgeluid bij het starten?</h2>
-        <div class="answer-buttons">
-            <button class="answer-btn" onclick="nextStep(3)">Ja</button>
-            <button class="answer-btn" onclick="nextStep(3)">Nee</button>
-        </div>
-    </div>
-
-    <div id="step3" class="hidden">
-        <h2 class="question">Resultaat: Waarschijnlijk een accu- of startmotorprobleem.</h2>
-        <div class="answer-buttons">
-            <button class="answer-btn" onclick="location.href='/'">Terug naar home</button>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    function nextStep(step) {
-        document.querySelectorAll('.diagnose-container > div').forEach(div => {
-            if (div.id.startsWith("step")) div.classList.add("hidden");
-        });
-
-        document.getElementById("step" + step).classList.remove("hidden");
-
-        let progress = document.getElementById("progress");
-        progress.style.width = (step * 33) + "%";
-    }
-</script>
-
-</body>
-</html>
-<script src="diagnoseData.js"></script>
-<script src="diagnoseFlow.js"></script>
+<!-- SYMPTOM KAARTEN -->
 <section class="symptom-cards">
     <h1 class="diag-title">Kies je probleem</h1>
 
@@ -97,11 +57,12 @@
             <p>Veel witte/blauwe rook uit de uitlaat.</p>
         </div>
 
-        <!-- later kun je hier alle andere symptomen bijzetten -->
+        <!-- Later kun je hier ALLE 19 symptomen toevoegen -->
     </div>
 </section>
 
+<!-- WIZARD (verstopt tot gebruiker een symptoom kiest) -->
 <div id="wizard" class="hidden"></div>
 
-<script src="diagnoseData.js"></script>
-<script src="diagnoseFlow.js"></script>
+</body>
+</html>
