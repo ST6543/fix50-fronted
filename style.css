@@ -161,4 +161,43 @@ footer {
 .hidden {
     display: none;
 }
+/* SYMPTOM CARDS */
+.symptom-cards {
+    padding: 40px;
+    text-align: center;
+}
+
+.diag-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.symptom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.symptom-card {
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.symptom-card:hover {
+    border-color: #ff7b00;
+    transform: translateY(-5px);
+}
+
+.symptom-card h3 {
+    color: #ff7b00;
+    margin-bottom: 10px;
+}
+
+.symptom-card p {
+    color: #cfcfcf;
+}
 
