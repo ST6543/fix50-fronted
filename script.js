@@ -29,3 +29,37 @@ async function register() {
     const data = await res.json();
     document.getElementById("message").innerText = data.message || "Account aangemaakt!";
 }
+
+// SCOOTERS LADEN
+async function loadScooters() {
+    const res = await fetch(`${API_URL}/api/scooters`);
+    const data = await res.json();
+
+    const list = document.getElementById("scooter-list");
+    list.innerHTML = "";
+
+    data.forEach(s => {
+        list.innerHTML += `<div class="card">
+            <h3>${s.naam}</h3>
+            <p>Kenteken: ${s.kenteken}</p>
+            <p>Kilometers: ${s.km}</p>
+        </div>`;
+    });
+}
+
+// ONDERHOUD LADEN
+async function loadOnderhoud() {
+    const res = await fetch(`${API_URL}/api/onderhoud`);
+    const data = await res.json();
+
+    const list = document.getElementById("onderhoud-list");
+    list.innerHTML = "";
+
+    data.forEach(o => {
+        list.innerHTML += `<div class="card">
+            <h3>${o.scooter}</h3>
+            <p>Datum: ${o.datum}</p>
+            <p>Beschrijving: ${o.beschrijving}</p>
+        </div>`;
+    });
+}
