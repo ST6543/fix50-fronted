@@ -126,3 +126,45 @@ nav a:hover {
 button {
     cursor: pointer;
 }
+/* ------------------------------
+   HOMEPAGE GRID
+------------------------------ */
+
+.home-container {
+    width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.home-card {
+    background: #1b1b1b;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #000;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.home-card:hover {
+    transform: translateY(-5px);
+    background: #222;
+}
+
+.home-card h3 {
+    margin-top: 0;
+    color: #ff6600;
+    font-size: 22px;
+}
+
+.home-card p {
+    color: #ccc;
+    font-size: 15px;
+}
+
