@@ -1,9 +1,6 @@
-// JUISTE backend URL
 const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
 
-// ---------------------------
 // LOGIN
-// ---------------------------
 async function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -35,9 +32,7 @@ async function login() {
     }
 }
 
-// ---------------------------
 // REGISTER
-// ---------------------------
 async function registerUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -69,12 +64,9 @@ async function registerUser() {
     }
 }
 
-// ---------------------------
 // SCOOTERS LADEN
-// ---------------------------
 async function loadScooters() {
     const token = localStorage.getItem("token");
-
     if (!token) {
         showMessage("Je bent niet ingelogd.");
         return;
@@ -105,12 +97,9 @@ async function loadScooters() {
     }
 }
 
-// ---------------------------
 // ONDERHOUD LADEN
-// ---------------------------
 async function loadOnderhoud() {
     const token = localStorage.getItem("token");
-
     if (!token) {
         showMessage("Je bent niet ingelogd.");
         return;
@@ -141,9 +130,7 @@ async function loadOnderhoud() {
     }
 }
 
-// ---------------------------
 // HULPFUNCTIE
-// ---------------------------
 function showMessage(msg, color = "red") {
     const el = document.getElementById("message");
     if (!el) return;
