@@ -2,47 +2,35 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fix50 – Scooter Diagnose & Onderhoud</title>
-
-    <!-- Koppel je CSS -->
+    <title>Fix50 – Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <img src="logo.png" alt="Fix50 Logo">
-    <a href="/login">Login</a>
+    <h1>Fix50</h1>
+    <nav>
+        <a href="login.html">Login</a>
+        <a href="register.html">Registreren</a>
+        <a href="scooter.html">Scooters</a>
+        <a href="onderhoud.html">Onderhoud</a>
+        <a href="diagnose.html">Diagnose</a>
+    </nav>
 </header>
 
-<section class="hero">
-    <img src="logo.png" alt="Fix50 Logo">
-    <h1>Diagnose. Onderhoud. Scooterbeheer.</h1>
-    <p>Alles voor jouw scooter, op één plek.</p>
-    <a class="btn" href="/diagnose">Start Diagnose</a>
-</section>
+<section class="content">
+    <h2 class="page-title">Welkom bij Fix50</h2>
 
-<section class="cards">
-    <div class="card" onclick="location.href='diagnose.html'" style="cursor:pointer;">
-    <h3>Diagnose</h3>
-    <p>Ontdek snel wat er mis is met je scooter.</p>
-</div>
-    
-    <div class="card">
-        <h3>Onderhoud</h3>
-        <p>Bekijk wat er binnenkort vervangen moet worden.</p>
-    </div>
+    <div class="form-container" style="width: 400px;">
+        <p>Beheer scooters, onderhoud en diagnose in één systeem.</p>
 
-    <div class="card">
-        <h3>Scooterbeheer</h3>
-        <p>Beheer al je scooters overzichtelijk op één plek.</p>
+        <button onclick="window.location.href='login.html'">Inloggen</button>
+        <button onclick="window.location.href='register.html'">Account aanmaken</button>
+        <button onclick="window.location.href='scooter.html'">Scooters bekijken</button>
+        <button onclick="window.location.href='diagnose.html'">Diagnose starten</button>
     </div>
 </section>
-
-<footer>
-    © 2026 Fix50 – Alle rechten voorbehouden
-</footer>
 
 </body>
 </html>
