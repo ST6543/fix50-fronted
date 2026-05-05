@@ -2,29 +2,27 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Registreren – Fix50</title>
+    <title>Scooters - Fix50</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
     <h1>Fix50</h1>
     <nav>
         <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
+        <a href="login.html">Logout</a>
+        <a href="onderhoud.html">Onderhoud</a>
+        <a href="diagnose.html">Diagnose</a>
     </nav>
 </header>
 
-<section class="form-container">
-    <h2>Account aanmaken</h2>
+<section class="content">
+    <h2 class="page-title">Jouw scooters</h2>
 
-    <input id="email" type="email" placeholder="E-mail">
-    <input id="password" type="password" placeholder="Wachtwoord">
+    <button onclick="loadScooters()">Scooters laden</button>
 
-    <button onclick="registerUser()">Registreren</button>
-
-    <p id="message"></p>
+    <div id="scooter-list"></div>
 </section>
 
 <script src="script.js"></script>
