@@ -2,9 +2,10 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Registreren - Fix50</title>
+    <title>Registreren – Fix50</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
@@ -21,11 +22,48 @@
     <input id="email" type="email" placeholder="E-mail">
     <input id="password" type="password" placeholder="Wachtwoord">
 
-    <button onclick="register()">Registreren</button>
+    <button onclick="registerUser()">Registreren</button>
 
     <p id="message"></p>
 </section>
 
-<script src="script.js"></script>
+<script>
+const API_BASE = "https://fix50-backend-login-en-registratie.onrender.com";
+
+async function registerUser() {
+    console.log("registerUser() gestart");
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        document.getElementById("message").innerText = "Vul alle velden in.";
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        console.log("API antwoord:", data);
+
+        if (data.success) {
+            document.getElementById("message").style.color = "lightgreen";
+            document.getElementById("message").innerText = "Account aangemaakt!";
+            setTimeout(() => window.location.href = "login.html", 1000);
+        } else {
+            document.getElementById("message").innerText = data.error || "Er ging iets mis.";
+        }
+    } catch (err) {
+        document.getElementById("message").innerText = "Server niet bereikbaar.";
+        console.error(err);
+    }
+}
+</script>
+
 </body>
 </html>
