@@ -36,6 +36,22 @@
 
 </section>
 
+<!-- BEWERKEN POPUP -->
+<div id="edit-popup" class="popup" style="display:none;">
+    <div class="popup-content">
+        <h3>Scooter bewerken</h3>
+
+        <input id="edit-naam" placeholder="Nieuwe naam">
+        <input id="edit-kenteken" placeholder="Nieuw kenteken">
+        <input id="edit-km" placeholder="Nieuwe kilometers" type="number">
+
+        <input type="hidden" id="edit-id">
+
+        <button onclick="updateScooter()">Opslaan</button>
+        <button class="danger" onclick="document.getElementById('edit-popup').style.display='none'">Annuleren</button>
+    </div>
+</div>
+
 <script src="script.js"></script>
 <script>
     // Automatisch scooters laden bij openen van de pagina
