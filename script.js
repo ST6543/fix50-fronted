@@ -1,69 +1,50 @@
 const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
 
-// LOGIN
+/* ---------------- LOGIN ---------------- */
 async function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    if (!email || !password) {
-        showMessage("Vul alle velden in.");
-        return;
-    }
+    const res = await fetch(`${API_URL}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    });
 
-    try {
-        const res = await fetch(`${API_URL}/api/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+    const data = await res.json();
 
-        const data = await res.json();
-
-        if (data.token) {
-            localStorage.setItem("token", data.token);
-            window.location.href = "scooter.html";
-        } else {
-            showMessage(data.error || "Onjuiste gegevens.");
-        }
-    } catch {
-        showMessage("Server niet bereikbaar.");
+    if (data.token) {
+        localStorage.setItem("token", data.token);
+        window.location.href = "scooter.html";
+    } else {
+        showMessage(data.error);
     }
 }
 
-// REGISTER (DIRECT INLOGGEN)
+/* ---------------- REGISTER ---------------- */
 async function registerUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    if (!email || !password) {
-        showMessage("Vul alle velden in.");
-        return;
-    }
+    const res = await fetch(`${API_URL}/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    });
 
-    try {
-        const res = await fetch(`${API_URL}/api/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+    const data = await res.json();
 
-        const data = await res.json();
-
-        if (data.token) {
-            localStorage.setItem("token", data.token);
-            window.location.href = "scooter.html";
-        } else {
-            showMessage(data.error || "Er ging iets mis.");
-        }
-    } catch {
-        showMessage("Server niet bereikbaar.");
+    if (data.token) {
+        localStorage.setItem("token", data.token);
+        window.location.href = "scooter.html";
+    } else {
+        showMessage(data.error);
     }
 }
 
-// SCOOTERS LADEN
+/* ---------------- SCOOTERS LADEN ---------------- */
 async function loadScooters() {
     const token = localStorage.getItem("token");
-    if (!token) return showMessage("Je bent niet ingelogd.");
 
     const res = await fetch(`${API_URL}/api/scooters`, {
         headers: { "Authorization": `Bearer ${token}` }
@@ -80,18 +61,21 @@ async function loadScooters() {
                 <h3>${s.naam}</h3>
                 <p>Kenteken: ${s.kenteken}</p>
                 <p>Kilometers: ${s.km}</p>
-            </div>`;
+
+                <button onclick="editScooter(${s.id})">✏ Bewerken</button>
+                <button onclick="deleteScooter(${s.id})" class="danger">🗑 Verwijderen</button>
+            </div>
+        `;
     });
 }
 
-// SCOOTER OPSLAAN
+/* ---------------- SCOOTER OPSLAAN ---------------- */
 async function saveScooter() {
     const naam = document.getElementById("naam").value;
     const kenteken = document.getElementById("kenteken").value;
     const km = document.getElementById("km").value;
 
     const token = localStorage.getItem("token");
-    if (!token) return showMessage("Niet ingelogd.");
 
     const res = await fetch(`${API_URL}/api/scooters`, {
         method: "POST",
@@ -105,14 +89,51 @@ async function saveScooter() {
     const data = await res.json();
 
     if (data.success) {
-        showMessage("Scooter opgeslagen!", "green");
         loadScooters();
-    } else {
-        showMessage(data.error);
+        showMessage("Scooter opgeslagen!", "green");
     }
 }
 
-// HULPFUNCTIE
+/* ---------------- SCOOTER VERWIJDEREN ---------------- */
+async function deleteScooter(id) {
+    const token = localStorage.getItem("token");
+
+    await fetch(`${API_URL}/api/scooters/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    loadScooters();
+}
+
+/* ---------------- SCOOTER BEWERKEN ---------------- */
+function editScooter(id) {
+    document.getElementById("edit-popup").style.display = "block";
+    document.getElementById("edit-id").value = id;
+}
+
+async function updateScooter() {
+    const id = document.getElementById("edit-id").value;
+    const naam = document.getElementById("edit-naam").value;
+    const kenteken = document.getElementById("edit-kenteken").value;
+    const km = document.getElementById("edit-km").value;
+
+    const token = localStorage.getItem("token");
+
+    await fetch(`${API_URL}/api/scooters/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ naam, kenteken, km })
+    });
+
+    document.getElementById("edit-popup").style.display = "none";
+    loadScooters();
+}
+
+/* ---------------- MESSAGE ---------------- */
 function showMessage(msg, color = "red") {
     const el = document.getElementById("message");
     if (!el) return;
