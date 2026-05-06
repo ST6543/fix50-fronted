@@ -18,7 +18,6 @@ async function login() {
         });
 
         const data = await res.json();
-        console.log("Login response:", data);
 
         if (data.token) {
             localStorage.setItem("token", data.token);
@@ -26,8 +25,7 @@ async function login() {
         } else {
             showMessage(data.error || "Onjuiste gegevens.");
         }
-    } catch (err) {
-        console.error(err);
+    } catch {
         showMessage("Server niet bereikbaar.");
     }
 }
@@ -50,17 +48,14 @@ async function registerUser() {
         });
 
         const data = await res.json();
-        console.log("Register response:", data);
 
-        // DIRECT INLOGGEN NA REGISTREREN
         if (data.token) {
             localStorage.setItem("token", data.token);
             window.location.href = "scooter.html";
         } else {
             showMessage(data.error || "Er ging iets mis.");
         }
-    } catch (err) {
-        console.error(err);
+    } catch {
         showMessage("Server niet bereikbaar.");
     }
 }
@@ -68,77 +63,28 @@ async function registerUser() {
 // SCOOTERS LADEN
 async function loadScooters() {
     const token = localStorage.getItem("token");
-    if (!token) {
-        showMessage("Je bent niet ingelogd.");
-        return;
-    }
+    if (!token) return showMessage("Je bent niet ingelogd.");
 
-    try {
-        const res = await fetch(`${API_URL}/api/scooters`, {
-            headers: { "Authorization": `Bearer ${token}` }
-        });
+    const res = await fetch(`${API_URL}/api/scooters`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
 
-        const data = await res.json();
-        console.log("Scooters:", data);
+    const data = await res.json();
 
-        const list = document.getElementById("scooter-list");
-        list.innerHTML = "";
+    const list = document.getElementById("scooter-list");
+    list.innerHTML = "";
 
-        data.forEach(s => {
-            list.innerHTML += `
-                <div class="card">
-                    <h3>${s.naam}</h3>
-                    <p>Kenteken: ${s.kenteken}</p>
-                    <p>Kilometers: ${s.km}</p>
-                </div>`;
-        });
-    } catch (err) {
-        console.error(err);
-        showMessage("Kan scooters niet laden.");
-    }
+    data.forEach(s => {
+        list.innerHTML += `
+            <div class="card">
+                <h3>${s.naam}</h3>
+                <p>Kenteken: ${s.kenteken}</p>
+                <p>Kilometers: ${s.km}</p>
+            </div>`;
+    });
 }
 
-// ONDERHOUD LADEN
-async function loadOnderhoud() {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        showMessage("Je bent niet ingelogd.");
-        return;
-    }
-
-    try {
-        const res = await fetch(`${API_URL}/api/onderhoud`, {
-            headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        const data = await res.json();
-        console.log("Onderhoud:", data);
-
-        const list = document.getElementById("onderhoud-list");
-        list.innerHTML = "";
-
-        data.forEach(o => {
-            list.innerHTML += `
-                <div class="card">
-                    <h3>${o.scooter}</h3>
-                    <p>Datum: ${o.datum}</p>
-                    <p>Beschrijving: ${o.beschrijving}</p>
-                </div>`;
-        });
-    } catch (err) {
-        console.error(err);
-        showMessage("Kan onderhoud niet laden.");
-    }
-}
-
-// HULPFUNCTIE
-function showMessage(msg, color = "red") {
-    const el = document.getElementById("message");
-    if (!el) return;
-    el.style.color = color;
-    el.innerText = msg;
-}
-
+// SCOOTER OPSLAAN
 async function saveScooter() {
     const naam = document.getElementById("naam").value;
     const kenteken = document.getElementById("kenteken").value;
@@ -166,3 +112,10 @@ async function saveScooter() {
     }
 }
 
+// HULPFUNCTIE
+function showMessage(msg, color = "red") {
+    const el = document.getElementById("message");
+    if (!el) return;
+    el.style.color = color;
+    el.innerText = msg;
+}
