@@ -12,19 +12,33 @@
     <nav>
         <a href="index.html">Home</a>
         <a href="scooter.html">Scooters</a>
+        <a href="onderhoud.html">Onderhoud</a>
         <a href="diagnose.html">Diagnose</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
 </header>
 
 <section class="content">
-    <h2 class="page-title">Onderhoud</h2>
 
-    <button onclick="loadOnderhoud()">Onderhoud laden</button>
+    <h2 class="page-title">Onderhoudsadvies</h2>
 
-    <div id="onderhoud-list"></div>
+    <div class="form-container">
+        <input id="kmPerWeek" type="number" placeholder="Km per week">
+        <input id="huidigeKm" type="number" placeholder="Huidige km-stand">
+
+        <select id="type">
+            <option value="2T">2T</option>
+            <option value="4T">4T</option>
+        </select>
+
+        <button onclick="toonOnderhoud()">Bereken onderhoud</button>
+    </div>
+
+    <div id="onderhoud-lijst"></div>
+
 </section>
 
-<script src="script.js"></script>
+<script src="onderhoud.js"></script>
+
 </body>
 </html>
