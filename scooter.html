@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-<h2 class="page-title">Scooter toevoegen</h2>
-
-<div class="form-container">
-    <input id="naam" placeholder="Scooter naam">
-    <input id="kenteken" placeholder="Kenteken">
-    <input id="km" placeholder="Kilometers" type="number">
-    <button onclick="saveScooter()">Opslaan</button>
-    <p id="message"></p>
-</div>
-
-<h2 class="page-title">Jouw scooters</h2>
-<div id="scooter-list"></div>
-
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -24,20 +11,36 @@
     <h1>Fix50</h1>
     <nav>
         <a href="index.html">Home</a>
-        <a href="login.html">Logout</a>
+        <a href="scooter.html">Scooters</a>
         <a href="onderhoud.html">Onderhoud</a>
         <a href="diagnose.html">Diagnose</a>
+        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
 </header>
 
 <section class="content">
+
+    <h2 class="page-title">Scooter toevoegen</h2>
+
+    <div class="form-container">
+        <input id="naam" placeholder="Scooter naam">
+        <input id="kenteken" placeholder="Kenteken">
+        <input id="km" placeholder="Kilometers" type="number">
+        <button onclick="saveScooter()">Opslaan</button>
+        <p id="message"></p>
+    </div>
+
     <h2 class="page-title">Jouw scooters</h2>
 
-    <button onclick="loadScooters()">Scooters laden</button>
-
     <div id="scooter-list"></div>
+
 </section>
 
 <script src="script.js"></script>
+<script>
+    // Automatisch scooters laden bij openen van de pagina
+    loadScooters();
+</script>
+
 </body>
 </html>
