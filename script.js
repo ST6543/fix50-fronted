@@ -138,3 +138,31 @@ function showMessage(msg, color = "red") {
     el.style.color = color;
     el.innerText = msg;
 }
+
+async function saveScooter() {
+    const naam = document.getElementById("naam").value;
+    const kenteken = document.getElementById("kenteken").value;
+    const km = document.getElementById("km").value;
+
+    const token = localStorage.getItem("token");
+    if (!token) return showMessage("Niet ingelogd.");
+
+    const res = await fetch(`${API_URL}/api/scooters`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ naam, kenteken, km })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+        showMessage("Scooter opgeslagen!", "green");
+        loadScooters();
+    } else {
+        showMessage(data.error);
+    }
+}
+
