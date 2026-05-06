@@ -32,7 +32,7 @@ async function login() {
     }
 }
 
-// REGISTER
+// REGISTER (DIRECT INLOGGEN)
 async function registerUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -52,9 +52,10 @@ async function registerUser() {
         const data = await res.json();
         console.log("Register response:", data);
 
-        if (data.success) {
-            showMessage("Account aangemaakt!", "green");
-            setTimeout(() => window.location.href = "login.html", 1000);
+        // DIRECT INLOGGEN NA REGISTREREN
+        if (data.token) {
+            localStorage.setItem("token", data.token);
+            window.location.href = "scooter.html";
         } else {
             showMessage(data.error || "Er ging iets mis.");
         }
