@@ -110,3 +110,67 @@ function toonOnderhoud() {
         `;
     });
 }
+const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
+
+/* ------------------------------
+   INSTELLINGEN OPSLAAN
+------------------------------ */
+async function saveMaintenanceSettings() {
+    const kmPerWeek = Number(document.getElementById("kmPerWeek").value);
+    const huidigeKm = Number(document.getElementById("huidigeKm").value);
+    const type = document.getElementById("type").value;
+
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_URL}/api/maintenance/settings`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ kmPerWeek, huidigeKm, type })
+    });
+
+    const data = await res.json();
+
+    const msg = document.getElementById("msg");
+    if (data.success) {
+        msg.style.color = "green";
+        msg.innerText = "Instellingen opgeslagen!";
+    } else {
+        msg.style.color = "red";
+        msg.innerText = data.error || "Er ging iets mis.";
+    }
+}
+
+/* ------------------------------
+   ADVIES OPHALEN
+------------------------------ */
+async function loadMaintenanceAdvice() {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_URL}/api/maintenance/advice`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const adviezen = await res.json();
+
+    const list = document.getElementById("onderhoud-lijst");
+    list.innerHTML = "";
+
+    adviezen.forEach(a => {
+        list.innerHTML += `
+            <div class="card ${a.status.toLowerCase()}">
+                <h3>${a.onderdeel}</h3>
+                <p>Volgende onderhoud: ${a.minKm ?? "-"} km</p>
+                <p>Nog te gaan: ${a.kmNog ?? "-"} km</p>
+                <p>Over: ${a.weken ?? "-"} weken</p>
+                <p>Datum: ${a.datum}</p>
+                <p>Status: ${a.status}</p>
+                <p>${a.info}</p>
+            </div>
+        `;
+    });
+}
