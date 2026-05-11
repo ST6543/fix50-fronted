@@ -10,34 +10,49 @@ body {
     color: white;
 }
 
-/* ------------------------------
-   HEADER (Fix50 stijl)
------------------------------- */
 
-header {
-    background: #111;
-    padding: 15px 25px;
+/* HEADER */
+.topbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    background: #111;
+    padding: 12px 25px;
     border-bottom: 2px solid #ff6600;
 }
 
-header img {
-    width: 130px;
-    height: auto;
-    filter: drop-shadow(0 0 8px #000);
-}
-
-header a {
-    color: #ff6600;
-    font-size: 18px;
+/* LOGO */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
-    font-weight: bold;
 }
 
-header a:hover {
-    color: #ff7f2a;
+.logo {
+    height: 45px;
+    width: auto;
+    cursor: pointer;
+}
+
+.logo-text {
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* NAVIGATIE */
+.nav-links a {
+    margin-left: 20px;
+    color: #ff6600;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: white;
 }
 
 /* ------------------------------
