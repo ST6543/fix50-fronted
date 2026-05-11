@@ -1,18 +1,21 @@
-// PAS DIT AAN NAAR JE ECHTE BACKEND-URL
-const API_URL = "https://fix50.onrender.com";
 
-// Helper: token ophalen
+// JUISTE BACKEND-URL
+const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
+
+// Token ophalen
 function getToken() {
   return localStorage.getItem("token");
 }
 
-// Helper: standaard fetch met auth
+// Standaard API-call met token
 async function apiFetch(path, options = {}) {
   const token = getToken();
   const headers = options.headers || {};
+
   if (token) {
     headers["Authorization"] = "Bearer " + token;
   }
+
   if (!headers["Content-Type"] && options.body) {
     headers["Content-Type"] = "application/json";
   }
@@ -23,13 +26,15 @@ async function apiFetch(path, options = {}) {
   if (!res.ok) {
     throw new Error(data.error || "Er ging iets mis");
   }
+
   return data;
 }
 
-/* ------------------------------
+/* ============================================
    SCOOTERS
------------------------------- */
+   ============================================ */
 
+// Scooters laden
 async function loadScooters() {
   const list = document.getElementById("scooter-list");
   if (!list) return;
@@ -38,29 +43,41 @@ async function loadScooters() {
 
   try {
     const scooters = await apiFetch("/api/scooters");
+
     if (!scooters.length) {
       list.innerHTML = "<p>Je hebt nog geen scooters.</p>";
       return;
     }
 
     list.innerHTML = "";
+
     scooters.forEach(s => {
       const div = document.createElement("div");
       div.className = "card";
+
       div.innerHTML = `
         <h3>${s.naam}</h3>
         <p>Kenteken: ${s.kenteken}</p>
         <p>Kilometers: ${s.km}</p>
-        <button onclick="openEditScooter(${s.id}, '${s.naam}', '${s.kenteken}', ${s.km})">Bewerken</button>
-        <button class="danger" onclick="deleteScooter(${s.id})">Verwijderen</button>
+
+        <button onclick="openEditScooter(${s.id}, '${s.naam}', '${s.kenteken}', ${s.km})">
+          Bewerken
+        </button>
+
+        <button class="danger" onclick="deleteScooter(${s.id})">
+          Verwijderen
+        </button>
       `;
+
       list.appendChild(div);
     });
+
   } catch (err) {
     list.innerHTML = `<p style="color:red;">${err.message}</p>`;
   }
 }
 
+// Scooter opslaan
 async function saveScooter() {
   const naam = document.getElementById("naam").value.trim();
   const kenteken = document.getElementById("kenteken").value.trim();
@@ -68,6 +85,7 @@ async function saveScooter() {
   const msg = document.getElementById("message");
 
   msg.textContent = "";
+  msg.style.color = "red";
 
   if (!naam || !kenteken || !km) {
     msg.textContent = "Alle velden zijn verplicht.";
@@ -79,26 +97,32 @@ async function saveScooter() {
       method: "POST",
       body: JSON.stringify({ naam, kenteken, km })
     });
+
     msg.style.color = "lime";
     msg.textContent = "Scooter opgeslagen.";
+
     document.getElementById("naam").value = "";
     document.getElementById("kenteken").value = "";
     document.getElementById("km").value = "";
+
     loadScooters();
+
   } catch (err) {
-    msg.style.color = "red";
     msg.textContent = err.message;
   }
 }
 
+// Popup openen
 function openEditScooter(id, naam, kenteken, km) {
   document.getElementById("edit-id").value = id;
   document.getElementById("edit-naam").value = naam;
   document.getElementById("edit-kenteken").value = kenteken;
   document.getElementById("edit-km").value = km;
+
   document.getElementById("edit-popup").style.display = "block";
 }
 
+// Scooter updaten
 async function updateScooter() {
   const id = Number(document.getElementById("edit-id").value);
   const naam = document.getElementById("edit-naam").value.trim();
@@ -110,13 +134,16 @@ async function updateScooter() {
       method: "PUT",
       body: JSON.stringify({ naam, kenteken, km })
     });
+
     document.getElementById("edit-popup").style.display = "none";
     loadScooters();
+
   } catch (err) {
     alert(err.message);
   }
 }
 
+// Scooter verwijderen
 async function deleteScooter(id) {
   if (!confirm("Weet je zeker dat je deze scooter wilt verwijderen?")) return;
 
@@ -128,9 +155,9 @@ async function deleteScooter(id) {
   }
 }
 
-/* ------------------------------
+/* ============================================
    ONDERHOUD
------------------------------- */
+   ============================================ */
 
 async function saveMaintenanceSettings() {
   const kmPerWeek = Number(document.getElementById("kmPerWeek").value);
@@ -139,10 +166,10 @@ async function saveMaintenanceSettings() {
   const msg = document.getElementById("maint-message");
 
   msg.textContent = "";
+  msg.style.color = "red";
 
   if (!kmPerWeek || !huidigeKm || !type) {
     msg.textContent = "Alle velden zijn verplicht.";
-    msg.style.color = "red";
     return;
   }
 
@@ -151,11 +178,13 @@ async function saveMaintenanceSettings() {
       method: "POST",
       body: JSON.stringify({ kmPerWeek, huidigeKm, type })
     });
+
     msg.style.color = "lime";
     msg.textContent = "Instellingen opgeslagen.";
+
     loadMaintenanceAdvice();
+
   } catch (err) {
-    msg.style.color = "red";
     msg.textContent = err.message;
   }
 }
@@ -175,9 +204,11 @@ async function loadMaintenanceAdvice() {
     }
 
     container.innerHTML = "";
+
     adviezen.forEach(a => {
       const div = document.createElement("div");
       div.className = "card";
+
       div.innerHTML = `
         <h3>${a.onderdeel}</h3>
         <p>Type: ${a.type}</p>
@@ -186,8 +217,10 @@ async function loadMaintenanceAdvice() {
         <p>Nog: ${a.kmNog ?? "-"} km</p>
         ${a.info ? `<p>Info: ${a.info}</p>` : ""}
       `;
+
       container.appendChild(div);
     });
+
   } catch (err) {
     container.innerHTML = `<p style="color:red;">${err.message}</p>`;
   }
