@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Registreren - Fix50</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NIEUWE STRAKKE HEADER -->
 <header class="topbar">
     <a href="index.html" class="logo-container">
         <img src="logo.png" alt="Fix50 logo" class="logo">
@@ -7,19 +16,6 @@
     </a>
 
     <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="scooter.html">Scooters</a>
-        <a href="onderhoud.html">Onderhoud</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
-    </nav>
-</header>
-
-<body>
-
-<header>
-    <h1>Fix50</h1>
-    <nav>
         <a href="index.html">Home</a>
         <a href="login.html">Login</a>
     </nav>
@@ -40,8 +36,6 @@
 const API_BASE = "https://fix50-backend-login-en-registratie.onrender.com";
 
 async function registerUser() {
-    console.log("registerUser() gestart");
-
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -58,7 +52,6 @@ async function registerUser() {
         });
 
         const data = await res.json();
-        console.log("API antwoord:", data);
 
         if (data.success) {
             document.getElementById("message").style.color = "lightgreen";
@@ -69,7 +62,6 @@ async function registerUser() {
         }
     } catch (err) {
         document.getElementById("message").innerText = "Server niet bereikbaar.";
-        console.error(err);
     }
 }
 </script>
