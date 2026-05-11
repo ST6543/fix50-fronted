@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="nl">
- <header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" alt="Fix50 logo" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
+<head>
+    <meta charset="UTF-8">
+    <title>Scooters - Fix50</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="scooter.html">Scooters</a>
-        <a href="onderhoud.html">Onderhoud</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
-    </nav>
-</header>
 <body>
+
+<!-- LOGIN CHECK -->
 <script>
   if (!localStorage.getItem("token")) {
     window.location.href = "login.html";
   }
 </script>
 
-<header>
-    <h1>Fix50</h1>
-    <nav>
+<!-- NIEUWE STRAKKE HEADER -->
+<header class="topbar">
+    <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Fix50 logo" class="logo">
+        <span class="logo-text">Fix50</span>
+    </a>
+
+    <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="scooter.html">Scooters</a>
         <a href="onderhoud.html">Onderhoud</a>
@@ -57,20 +56,3 @@
 
         <input id="edit-naam" placeholder="Nieuwe naam">
         <input id="edit-kenteken" placeholder="Nieuw kenteken">
-        <input id="edit-km" placeholder="Nieuwe kilometers" type="number">
-
-        <input type="hidden" id="edit-id">
-
-        <button onclick="updateScooter()">Opslaan</button>
-        <button class="danger" onclick="document.getElementById('edit-popup').style.display='none'">Annuleren</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
-<script>
-    // Automatisch scooters laden bij openen van de pagina
-    loadScooters();
-</script>
-
-</body>
-</html>
