@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Inloggen – Fix50</title>
-    <link rel="stylesheet" href="style.css">
-    <h1>
-  <a href="index.html">
-    <img src="logo.png" alt="Fix50" class="logo">
-  </a>
-</h1>
-</head>
+<header class="topbar">
+    <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Fix50 logo" class="logo">
+        <span class="logo-text">Fix50</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="scooter.html">Scooters</a>
+        <a href="onderhoud.html">Onderhoud</a>
+        <a href="diagnose.html">Diagnose</a>
+        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
+    </nav>
+</header>
 
 <body>
 
