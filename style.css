@@ -282,6 +282,6 @@ header a:hover {
     background: #ff7f2a;
 }
 .logo {
-  height: 50px;      /* pas aan naar jouw logo-grootte */
+  height: 150px;      /* pas aan naar jouw logo-grootte */
   cursor: pointer;
 }
