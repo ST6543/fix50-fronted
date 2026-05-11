@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnose - Fix50</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NIEUWE STRAKKE HEADER -->
 <header class="topbar">
     <a href="index.html" class="logo-container">
         <img src="logo.png" alt="Fix50 logo" class="logo">
@@ -13,13 +22,6 @@
         <a href="diagnose.html">Diagnose</a>
         <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
-</header>
-
-<body>
-
-<!-- HEADER -->
-<header>
-    <a href="/login">Login</a>
 </header>
 
 <!-- SYMPTOMEN KAARTEN -->
@@ -128,6 +130,9 @@
 
 <!-- WIZARD -->
 <div id="wizard" class="hidden"></div>
+
+<script src="diagnoseData.js"></script>
+<script src="diagnoseFlow.js"></script>
 
 </body>
 </html>
