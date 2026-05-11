@@ -315,5 +315,19 @@ body {
 }
 
 #wizard button:hover {
+
+.home-center {
+    text-align: center;
+    margin-top: 60px;
+    padding: 40px 0;
+    background: radial-gradient(circle at center, #222 0%, #111 70%);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
     background: #ff7f2a;
 }
