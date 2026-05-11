@@ -281,3 +281,7 @@ header a:hover {
 #wizard button:hover {
     background: #ff7f2a;
 }
+.logo {
+  height: 50px;      /* pas aan naar jouw logo-grootte */
+  cursor: pointer;
+}
