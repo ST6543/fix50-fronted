@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Onderhoud - Fix50</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- LOGIN CHECK -->
+<script>
+  if (!localStorage.getItem("token")) {
+    window.location.href = "login.html";
+  }
+</script>
+
+<!-- NIEUWE STRAKKE HEADER -->
 <header class="topbar">
     <a href="index.html" class="logo-container">
         <img src="logo.png" alt="Fix50 logo" class="logo">
@@ -14,33 +30,17 @@
         <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
 </header>
-<body>
-<script>
-  if (!localStorage.getItem("token")) {
-    window.location.href = "login.html";
-  }
-</script>
-
-<header>
-    <h1>Fix50</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="scooter.html">Scooters</a>
-        <a href="onderhoud.html">Onderhoud</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
-    </nav>
-</header>
 
 <section class="content">
+
     <h2 class="page-title">Onderhoudsinstellingen</h2>
 
     <div class="form-container">
         <input id="kmPerWeek" type="number" placeholder="Kilometers per week">
         <input id="huidigeKm" type="number" placeholder="Huidige kilometerstand">
 
-        <div style="margin: 10px 0; text-align:left; color:#ccc;">
-            <label><input type="radio" name="type" value="2T"> 2T</label><br>
+        <div class="radio-group">
+            <label><input type="radio" name="type" value="2T"> 2T</label>
             <label><input type="radio" name="type" value="4T"> 4T</label>
         </div>
 
@@ -50,6 +50,7 @@
 
     <h2 class="page-title">Onderhoudsadvies</h2>
     <div id="maintenance-list"></div>
+
 </section>
 
 <script src="script.js"></script>
@@ -59,5 +60,3 @@
 
 </body>
 </html>
-<script src="script.js"></script>
-<script>loadMaintenanceAdvice();</script>
