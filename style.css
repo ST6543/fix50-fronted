@@ -11,7 +11,10 @@ body {
 }
 
 
-/* HEADER */
+/* ------------------------------
+   HEADER
+------------------------------ */
+
 .topbar {
     display: flex;
     align-items: center;
@@ -21,7 +24,6 @@ body {
     border-bottom: 2px solid #ff6600;
 }
 
-/* LOGO */
 .logo-container {
     display: flex;
     align-items: center;
@@ -30,7 +32,7 @@ body {
 }
 
 .logo {
-    height: 45px;
+    height: 55px;      /* PERFECTE GROOTTE VOOR HEADER */
     width: auto;
     cursor: pointer;
 }
@@ -42,7 +44,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* NAVIGATIE */
 .nav-links a {
     margin-left: 20px;
     color: #ff6600;
@@ -54,6 +55,7 @@ body {
 .nav-links a:hover {
     color: white;
 }
+
 
 /* ------------------------------
    LOGIN / REGISTER
@@ -107,6 +109,7 @@ body {
     color: red;
 }
 
+
 /* ------------------------------
    ALGEMENE CARDS
 ------------------------------ */
@@ -125,6 +128,7 @@ body {
     color: #ff6600;
 }
 
+
 /* ------------------------------
    PAGINA TITELS
 ------------------------------ */
@@ -135,6 +139,7 @@ body {
     font-size: 28px;
     color: #ff6600;
 }
+
 
 /* ------------------------------
    HOMEPAGE
@@ -199,6 +204,7 @@ body {
     font-size: 15px;
 }
 
+
 /* ------------------------------
    DIAGNOSE TITEL
 ------------------------------ */
@@ -211,6 +217,7 @@ body {
     color: #ff6600;
     text-shadow: 0 0 10px #000;
 }
+
 
 /* ------------------------------
    SYMPTOMEN GRID
@@ -228,6 +235,7 @@ body {
     gap: 25px;
     margin-bottom: 60px;
 }
+
 
 /* ------------------------------
    SYMPTOM KAARTEN
@@ -257,6 +265,7 @@ body {
     color: #ccc;
     font-size: 15px;
 }
+
 
 /* ------------------------------
    DIAGNOSE WIZARD
@@ -295,8 +304,4 @@ body {
 
 #wizard button:hover {
     background: #ff7f2a;
-}
-.logo {
-  height: 150px;      /* pas aan naar jouw logo-grootte */
-  cursor: pointer;
 }
