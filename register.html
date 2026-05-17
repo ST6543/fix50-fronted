@@ -2,45 +2,40 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Registreren - Fix50</title>
+    <title>Registreren – Fix50</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NIEUWE STRAKKE HEADER -->
-<header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" alt="Fix50 logo" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
-
-    <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-    </nav>
+<header>
+    <img src="logo.png" alt="Fix50 Logo">
 </header>
 
-<section class="form-container">
+<div class="form-container">
     <h2>Account aanmaken</h2>
 
     <input id="email" type="email" placeholder="E-mail">
     <input id="password" type="password" placeholder="Wachtwoord">
 
-    <button onclick="registerUser()">Registreren</button>
+    <button onclick="register()">Registreren</button>
 
+    <p>Heb je al een account? <a href="login.html">Inloggen</a></p>
     <p id="message"></p>
-</section>
+</div>
 
 <script>
-const API_BASE = "https://fix50-backend-login-en-registratie.onrender.com";
+const API_BASE = "https://fix50.onrender.com"; // JUISTE BACKEND
 
-async function registerUser() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+async function register() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const msg = document.getElementById("message");
+
+    msg.innerText = "";
 
     if (!email || !password) {
-        document.getElementById("message").innerText = "Vul alle velden in.";
+        msg.innerText = "Vul alle velden in.";
         return;
     }
 
@@ -53,15 +48,16 @@ async function registerUser() {
 
         const data = await res.json();
 
-        if (data.success) {
-            document.getElementById("message").style.color = "lightgreen";
-            document.getElementById("message").innerText = "Account aangemaakt!";
-            setTimeout(() => window.location.href = "login.html", 1000);
-        } else {
-            document.getElementById("message").innerText = data.error || "Er ging iets mis.";
+        if (!res.ok) {
+            msg.innerText = data.error || "Er ging iets mis.";
+            return;
         }
+
+        alert("Account aangemaakt!");
+        window.location.href = "login.html";
+
     } catch (err) {
-        document.getElementById("message").innerText = "Server niet bereikbaar.";
+        msg.innerText = "Server niet bereikbaar.";
     }
 }
 </script>
