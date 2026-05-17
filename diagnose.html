@@ -19,7 +19,7 @@
         <a href="index.html">Home</a>
         <a href="scooter.html">Scooters</a>
         <a href="onderhoud.html">Onderhoud</a>
-        <a href="diagnose.html" class="active">Diagnose</a>
+        <a class="active" href="diagnose.html">Diagnose</a>
         <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
 </header>
@@ -27,28 +27,27 @@
 <section class="symptom-cards">
     <h1 class="diag-title">Kies je probleem</h1>
 
-    <div class="symptom-grid">
-
-        <!-- AUTOMATISCH GEGENEREERDE SYMPTOMEN -->
-        <script>
-            const symptoms = Object.keys(diagnoseData);
-            document.write(
-                symptoms.map(s => `
-                    <div class="symptom-card" onclick="startDiagnosis('${s}')">
-                        <h3>${s}</h3>
-                        <p>${diagnoseData[s].oorzaken[0]}</p>
-                    </div>
-                `).join("")
-            );
-        </script>
-
-    </div>
+    <div class="symptom-grid" id="symptomGrid"></div>
 </section>
 
+<!-- Wizard -->
 <div id="wizard" class="hidden"></div>
 
 <script src="diagnoseData.js"></script>
 <script src="diagnoseFlow.js"></script>
+
+<script>
+// AUTOMATISCH ALLE SYMPTOMEN LADEN
+const grid = document.getElementById("symptomGrid");
+const symptoms = Object.keys(diagnoseData);
+
+grid.innerHTML = symptoms.map(sym => `
+    <div class="symptom-card" onclick="startDiagnosis('${sym}')">
+        <h3>${sym}</h3>
+        <p>${diagnoseData[sym].oorzaken[0]}</p>
+    </div>
+`).join("");
+</script>
 
 </body>
 </html>
