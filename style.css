@@ -28,28 +28,16 @@ body {
 
 
 /* =========================================
-   TOPBAR (NIET MEE-ANIMEREN)
+   TOPBAR
 ========================================= */
 
 .topbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background: #111;
-    padding: 12px 25px;
-    border-bottom: 2px solid #ff6600;
-}
-
-.logo-container {
-    display: flex;
     align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.logo {
-    height: 55px;
-    width: auto;
+    background: #111;
+    padding: 15px 25px;
+    border-bottom: 2px solid #ff6600;
 }
 
 .logo-text {
@@ -72,118 +60,83 @@ body {
 
 
 /* =========================================
-   PAGE CONTAINER
+   HERO SECTION (HOME)
 ========================================= */
 
-.page-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 15px;
-
-    /* BELANGRIJK: transparant zodat achtergrond zichtbaar blijft */
-    background: transparent;
+.home-center,
+.hero {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
 }
 
-
-/* =========================================
-   TITLES
-========================================= */
-
-.title,
-.page-title {
-    text-align: center;
-    font-size: 30px;
+.home-title,
+.hero h1 {
+    font-size: 42px;
     font-weight: 800;
     color: #ff6600;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
+}
+
+.home-subtitle,
+.hero p {
+    font-size: 18px;
+    color: #ccc;
 }
 
 
 /* =========================================
-   LOGIN / REGISTER
+   HOME GRID + CARDS
 ========================================= */
 
-.form-container {
-    width: 350px;
-    margin: 80px auto;
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto 80px;
+}
+
+/* Glow animatie */
+@keyframes cardGlow {
+    0% { box-shadow: 0 0 10px rgba(255,102,0,0.2); }
+    50% { box-shadow: 0 0 25px rgba(255,102,0,0.45); }
+    100% { box-shadow: 0 0 10px rgba(255,102,0,0.2); }
+}
+
+.home-card {
+    display: block;
     background: rgba(0,0,0,0.55);
     padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-}
-
-.form-container h2 {
-    margin-bottom: 20px;
-    color: #ff6600;
-}
-
-.form-container input {
-    width: 90%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 6px;
-    background: #222;
+    border-radius: 14px;
+    text-decoration: none;
     color: white;
-    font-size: 16px;
-}
-
-.form-container button {
-    width: 95%;
-    padding: 12px;
-    margin-top: 10px;
-    background: #ff6600;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.form-container button:hover {
-    background: #ff7f2a;
-}
-
-#message {
-    margin-top: 15px;
-    font-size: 16px;
-    color: red;
-}
-
-
-/* =========================================
-   GENERAL CARDS (HOME, ONDERHOUD, DIAGNOSE)
-========================================= */
-
-.card,
-.home-card,
-.symptom-card {
-    background: rgba(0,0,0,0.55);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    transition: 0.25s;
     backdrop-filter: blur(6px);
-    transition: 0.2s;
+    border: 1px solid rgba(255,102,0,0.25);
 }
 
-.card h3,
-.home-card h3,
-.symptom-card h3 {
+.home-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    background: rgba(255,102,0,0.18);
+    animation: cardGlow 2.5s infinite ease-in-out;
+}
+
+.home-card h3 {
     margin-top: 0;
+    font-size: 24px;
     color: #ff6600;
 }
 
-.home-card:hover,
-.symptom-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255,102,0,0.2);
+.home-card p {
+    color: #ccc;
+    font-size: 15px;
 }
 
 
 /* =========================================
-   SCOOTER FORM (compact)
+   FORM CARDS (Scooter toevoegen)
 ========================================= */
 
 .form-card {
@@ -274,7 +227,7 @@ body {
 
 
 /* =========================================
-   POPUP
+   POPUP (Scooter bewerken)
 ========================================= */
 
 .popup {
