@@ -2,50 +2,114 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Fix50 – Slimme Scooterhulp</title>
+    <title>Fix50 – Home</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index.css">
+
+    <!-- Alleen voor index: rustige animated background -->
+    <style>
+        body {
+            background: linear-gradient(
+                135deg,
+                #0d0d0d,
+                #111827,
+                #1a1a1a,
+                #ff6600
+            );
+            background-size: 500% 500%;
+            animation: fix50SlowGradient 35s ease-in-out infinite;
+        }
+
+        @keyframes fix50SlowGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glow animatie */
+        @keyframes cardGlow {
+            0% { box-shadow: 0 0 10px rgba(255,102,0,0.2); }
+            50% { box-shadow: 0 0 25px rgba(255,102,0,0.45); }
+            100% { box-shadow: 0 0 10px rgba(255,102,0,0.2); }
+        }
+
+        /* Klikbare home-cards */
+        .home-card {
+            display: block;
+            background: rgba(0,0,0,0.55);
+            padding: 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: 0.25s;
+            backdrop-filter: blur(6px);
+        }
+
+        .home-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            background: rgba(255,102,0,0.18);
+            animation: cardGlow 2.5s infinite ease-in-out;
+        }
+
+        .home-card h3 {
+            margin-top: 0;
+            color: #ff6600;
+            font-size: 22px;
+        }
+
+        .home-card p {
+            color: #ccc;
+            font-size: 15px;
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" alt="Fix50 logo" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" class="logo">
+            <span class="logo-text">Fix50</span>
+        </a>
 
-    <nav class="nav-links">
-        <a href="login.html">Inloggen</a>
-        <a href="register.html">Registreren</a>
-    </nav>
-</header>
+        <nav class="nav-links">
+            <a class="active" href="index.html">Home</a>
+            <a href="scooter.html">Scooters</a>
+            <a href="onderhoud.html">Onderhoud</a>
+            <a href="diagnose.html">Diagnose</a>
+            <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
+        </nav>
+    </header>
 
-<section class="hero">
-    <h1>Los scooterproblemen op in minuten</h1>
-    <p>Fix50 helpt je met slimme diagnose, onderhoudsadvies en het beheren van al je scooters op één plek.</p>
+    <!-- HERO SECTION -->
+    <section class="home-center">
+        <img src="logo.png" class="home-logo">
+        <h1 class="home-title">Welkom bij Fix50</h1>
+        <p class="home-subtitle">Beheer, diagnoseer en onderhoud je scooter als een pro.</p>
+    </section>
 
-    <button class="cta-btn" onclick="location.href='diagnose.html'">
-        Start Diagnose
-    </button>
-</section>
+    <!-- GRID MET KAARTEN -->
+    <div class="home-grid">
 
-<section class="features">
-    <div class="feature-card">
-        <h3>🔧 Slimme Diagnose</h3>
-        <p>Doorloop een interactieve wizard en ontdek binnen enkele minuten de meest waarschijnlijke oorzaken van jouw scooterprobleem.</p>
+        <!-- Diagnose -->
+        <a href="diagnose.html" class="home-card">
+            <h3>Diagnose</h3>
+            <p>Ontdek wat er mis is met je scooter via slimme symptoomanalyse.</p>
+        </a>
+
+        <!-- Onderhoudsplanner -->
+        <a href="onderhoud.html" class="home-card">
+            <h3>Onderhoudsplanner</h3>
+            <p>Bekijk wanneer je scooter onderhoud nodig heeft en blijf veilig rijden.</p>
+        </a>
+
+        <!-- Scooterbeheer -->
+        <a href="scooter.html" class="home-card">
+            <h3>Scooterbeheer</h3>
+            <p>Beheer al je scooters overzichtelijk op één plek.</p>
+        </a>
+
     </div>
-
-    <div class="feature-card">
-        <h3>🛠 Onderhoudsplanner</h3>
-        <p>Ontvang automatisch onderhoudsadvies op basis van jouw kilometers, rijstijl en scooter‑type.</p>
-    </div>
-
-    <div class="feature-card">
-        <h3>📋 Scooterbeheer</h3>
-        <p>Beheer eenvoudig al je scooters, kilometerstanden en onderhoudsgegevens in één overzicht.</p>
-    </div>
-</section>
 
 </body>
 </html>
