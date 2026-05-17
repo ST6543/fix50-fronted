@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Diagnose - Fix50</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="diagnose.css">
 </head>
 
 <body>
 
-<!-- NIEUWE STRAKKE HEADER -->
 <header class="topbar">
     <a href="index.html" class="logo-container">
         <img src="logo.png" alt="Fix50 logo" class="logo">
@@ -19,116 +19,32 @@
         <a href="index.html">Home</a>
         <a href="scooter.html">Scooters</a>
         <a href="onderhoud.html">Onderhoud</a>
-        <a href="diagnose.html">Diagnose</a>
+        <a href="diagnose.html" class="active">Diagnose</a>
         <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
 </header>
 
-<!-- SYMPTOMEN KAARTEN -->
 <section class="symptom-cards">
     <h1 class="diag-title">Kies je probleem</h1>
 
     <div class="symptom-grid">
 
-        <div class="symptom-card" onclick="startDiagnosis('Start niet')">
-            <h3>Start niet</h3>
-            <p>Scooter reageert niet of startmotor draait niet.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Slaat af bij gas geven')">
-            <h3>Slaat af bij gas geven</h3>
-            <p>Motor valt weg zodra je gas geeft.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Loopt slecht stationair')">
-            <h3>Loopt slecht stationair</h3>
-            <p>Onregelmatig of te laag stationair toerental.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Rijdt niet harder dan 20–30 km/h')">
-            <h3>Rijdt niet harder dan 20–30 km/h</h3>
-            <p>Beperkte snelheid of weinig vermogen.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Tikkend/ratelend geluid')">
-            <h3>Tikkend/ratelend geluid</h3>
-            <p>Mechanisch geluid uit motor of variateur.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Rookt extreem')">
-            <h3>Rookt extreem</h3>
-            <p>Veel witte/blauwe rook uit de uitlaat.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Trilt bij optrekken')">
-            <h3>Trilt bij optrekken</h3>
-            <p>Trillingen bij wegrijden of accelereren.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Ploffend geluid / backfire')">
-            <h3>Ploffend geluid / backfire</h3>
-            <p>Plof uit uitlaat of carburateur.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Wordt te warm')">
-            <h3>Wordt te warm</h3>
-            <p>Motor loopt snel warm of oververhit.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Slaat af stationair maar rijdt goed')">
-            <h3>Slaat af stationair</h3>
-            <p>Valt uit bij stilstand maar rijdt normaal.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Verliest vermogen warm')">
-            <h3>Verliest vermogen warm</h3>
-            <p>Motor verliest kracht zodra hij warm is.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Onregelmatig vonkbeeld')">
-            <h3>Onregelmatige vonk</h3>
-            <p>Vonk valt soms weg of is zwak.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Koppeling pakt laat')">
-            <h3>Koppeling pakt laat</h3>
-            <p>Veel gas nodig voordat scooter rijdt.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Scooter schokt bij optrekken')">
-            <h3>Schokt bij optrekken</h3>
-            <p>Onregelmatig wegrijden of schokken.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Hoge toeren maar geen snelheid')">
-            <h3>Hoge toeren, geen snelheid</h3>
-            <p>Motor giert maar scooter versnelt niet.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Benzine loopt uit carburateur')">
-            <h3>Benzine lekt</h3>
-            <p>Benzine druppelt of loopt uit carburateur.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Scooter houdt in bij half gas')">
-            <h3>Houdt in bij half gas</h3>
-            <p>Motor hapert rond half gas.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Geen reactie op gas')">
-            <h3>Geen reactie op gas</h3>
-            <p>Motor reageert niet op gas geven.</p>
-        </div>
-
-        <div class="symptom-card" onclick="startDiagnosis('Scooter valt uit bij regen')">
-            <h3>Valt uit bij regen</h3>
-            <p>Problemen bij nat weer of regen.</p>
-        </div>
+        <!-- AUTOMATISCH GEGENEREERDE SYMPTOMEN -->
+        <script>
+            const symptoms = Object.keys(diagnoseData);
+            document.write(
+                symptoms.map(s => `
+                    <div class="symptom-card" onclick="startDiagnosis('${s}')">
+                        <h3>${s}</h3>
+                        <p>${diagnoseData[s].oorzaken[0]}</p>
+                    </div>
+                `).join("")
+            );
+        </script>
 
     </div>
 </section>
 
-<!-- WIZARD -->
 <div id="wizard" class="hidden"></div>
 
 <script src="diagnoseData.js"></script>
