@@ -1,4 +1,10 @@
 // -----------------------------
+// 0. API BASIS
+// -----------------------------
+const API_BASE = "https://fix50.onrender.com";
+const token = localStorage.getItem("token");
+
+// -----------------------------
 // 1. ONDERHOUDSREGELS (jouw tabel)
 // -----------------------------
 const MAINTENANCE_RULES = [
@@ -42,135 +48,130 @@ const MAINTENANCE_RULES = [
 ];
 
 // -----------------------------
-// 2. BEREKENING
+// 2. BEREKENING (km per DAG)
 // -----------------------------
-function berekenOnderhoud({ kmPerWeek, huidigeKm, type }) {
-    const nu = new Date();
+function calcMaintenance({ kmPerDag, huidigeKm, type }) {
+  const nu = new Date();
+  const kmPerWeek = kmPerDag * 7;
 
-    return MAINTENANCE_RULES
-        .filter(r => r.type === type || r.type === "Universeel")
-        .map(rule => {
-            if (!rule.minKm) {
-                return {
-                    ...rule,
-                    kmNog: null,
-                    weken: null,
-                    datum: "Tijdgebonden",
-                    status: "OK"
-                };
-            }
+  return MAINTENANCE_RULES
+    .filter(r => r.type === type || r.type === "Universeel")
+    .map(rule => {
+      if (!rule.minKm) {
+        return {
+          ...rule,
+          kmNog: null,
+          weken: null,
+          datum: "Tijdgebonden",
+          status: "OK"
+        };
+      }
 
-            const volgendeKm = rule.minKm;
-            const kmNog = Math.max(0, volgendeKm - huidigeKm);
-            const weken = kmNog / kmPerWeek;
-            const dagen = Math.round(weken * 7);
-            const datum = new Date(nu.getTime() + dagen * 86400000);
+      const volgendeKm = rule.minKm;
+      const kmNog = Math.max(0, volgendeKm - huidigeKm);
+      const weken = kmNog / kmPerWeek;
+      const dagen = Math.round(weken * 7);
+      const datum = new Date(nu.getTime() + dagen * 86400000);
 
-            let status;
-            if (kmNog <= 0) status = "TE LAAT";
-            else if (weken < 2) status = "DRINGEND";
-            else if (weken < 6) status = "BINNENKORT";
-            else status = "OK";
+      let status;
+      if (kmNog <= 0) status = "TE LAAT";
+      else if (weken < 2) status = "DRINGEND";
+      else if (weken < 6) status = "BINNENKORT";
+      else status = "OK";
 
-            return {
-                ...rule,
-                kmNog,
-                weken: Number(weken.toFixed(1)),
-                datum: datum.toISOString().slice(0, 10),
-                status
-            };
-        })
-        .sort((a, b) => a.kmNog - b.kmNog);
+      return {
+        ...rule,
+        kmNog,
+        weken: Number(weken.toFixed(1)),
+        datum: datum.toISOString().slice(0, 10),
+        status
+      };
+    })
+    .sort((a, b) => (a.kmNog ?? 0) - (b.kmNog ?? 0));
 }
 
 // -----------------------------
-// 3. UI
+// 3. SCOOTERS LADEN UIT BACKEND
 // -----------------------------
-function toonOnderhoud() {
-    const kmPerWeek = Number(document.getElementById("kmPerWeek").value);
-    const huidigeKm = Number(document.getElementById("huidigeKm").value);
-    const type = document.getElementById("type").value;
-
-    const adviezen = berekenOnderhoud({ kmPerWeek, huidigeKm, type });
-
-    const el = document.getElementById("onderhoud-lijst");
-    el.innerHTML = "";
-
-    adviezen.forEach(a => {
-        el.innerHTML += `
-            <div class="card ${a.status.toLowerCase()}">
-                <h3>${a.onderdeel}</h3>
-                <p>Volgende onderhoud: ${a.minKm ?? "-"} km</p>
-                <p>Nog te gaan: ${a.kmNog ?? "-"} km</p>
-                <p>Over: ${a.weken ?? "-"} weken</p>
-                <p>Datum: ${a.datum}</p>
-                <p>Status: ${a.status}</p>
-                <p>${a.info}</p>
-            </div>
-        `;
-    });
-}
-const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
-
-/* ------------------------------
-   INSTELLINGEN OPSLAAN
------------------------------- */
-async function saveMaintenanceSettings() {
-    const kmPerWeek = Number(document.getElementById("kmPerWeek").value);
-    const huidigeKm = Number(document.getElementById("huidigeKm").value);
-    const type = document.getElementById("type").value;
-
-    const token = localStorage.getItem("token");
-
-    const res = await fetch(`${API_URL}/api/maintenance/settings`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({ kmPerWeek, huidigeKm, type })
+async function loadScooters() {
+  try {
+    const res = await fetch(`${API_BASE}/api/scooters`, {
+      headers: { "Authorization": `Bearer ${token}` }
     });
 
     const data = await res.json();
+    const select = document.getElementById("scooterSelect");
 
-    const msg = document.getElementById("msg");
-    if (data.success) {
-        msg.style.color = "green";
-        msg.innerText = "Instellingen opgeslagen!";
-    } else {
-        msg.style.color = "red";
-        msg.innerText = data.error || "Er ging iets mis.";
-    }
+    select.innerHTML = data.map(s => `
+      <option value="${s.kenteken}"
+              data-km="${s.kilometerstand || s.km || 0}"
+              data-type="${s.type || '4T'}">
+        ${s.merk || "Scooter"} – ${s.kenteken}
+      </option>
+    `).join("");
+  } catch (e) {
+    console.error(e);
+  }
 }
 
-/* ------------------------------
-   ADVIES OPHALEN
------------------------------- */
-async function loadMaintenanceAdvice() {
-    const token = localStorage.getItem("token");
+// -----------------------------
+// 4. BEREKEN + BACKEND AANROEPEN
+// -----------------------------
+async function berekenOnderhoud() {
+  const select = document.getElementById("scooterSelect");
+  const option = select.options[select.selectedIndex];
 
-    const res = await fetch(`${API_URL}/api/maintenance/advice`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+  const scooter = option.value;
+  const huidigeKm = Number(option.dataset.km);
+  const type = option.dataset.type;
+  const kmPerDag = Number(document.getElementById("kmPerDag").value);
+
+  if (!kmPerDag || kmPerDag <= 0) {
+    document.getElementById("resultaat").innerHTML = "<p>Vul een geldige waarde in voor km per dag.</p>";
+    return;
+  }
+
+  try {
+    // LOKAAL BEREKENEN (voor direct tonen)
+    const adviezenLocal = calcMaintenance({ kmPerDag, huidigeKm, type });
+
+    // BACKEND AANROEPEN (voor mail via Resend)
+    const res = await fetch(`${API_BASE}/api/maintenance/calc`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ scooter, huidigeKm, type, kmPerDag })
     });
 
-    const adviezen = await res.json();
+    const data = await res.json();
+    const adviezen = data.adviezen || adviezenLocal;
 
-    const list = document.getElementById("onderhoud-lijst");
-    list.innerHTML = "";
-
-    adviezen.forEach(a => {
-        list.innerHTML += `
-            <div class="card ${a.status.toLowerCase()}">
-                <h3>${a.onderdeel}</h3>
-                <p>Volgende onderhoud: ${a.minKm ?? "-"} km</p>
-                <p>Nog te gaan: ${a.kmNog ?? "-"} km</p>
-                <p>Over: ${a.weken ?? "-"} weken</p>
-                <p>Datum: ${a.datum}</p>
-                <p>Status: ${a.status}</p>
-                <p>${a.info}</p>
-            </div>
-        `;
-    });
+    const el = document.getElementById("resultaat");
+    el.innerHTML = `
+      <h3>Onderhoudsadvies</h3>
+      <p>Een e‑mail met dit advies is verzonden.</p>
+      ${adviezen.map(a => `
+        <div class="card ${a.status.toLowerCase()}">
+          <h3>${a.onderdeel}</h3>
+          <p>Volgende onderhoud: ${a.minKm ?? "-"} km</p>
+          <p>Nog te gaan: ${a.kmNog ?? "-"} km</p>
+          <p>Over: ${a.weken ?? "-"} weken</p>
+          <p>Datum: ${a.datum}</p>
+          <p>Status: ${a.status}</p>
+          <p>${a.info}</p>
+        </div>
+      `).join("")}
+    `;
+  } catch (e) {
+    console.error(e);
+    document.getElementById("resultaat").innerHTML =
+      "<p>Er ging iets mis bij het ophalen van het onderhoudsadvies.</p>";
+  }
 }
+
+// -----------------------------
+// 5. INIT
+// -----------------------------
+window.addEventListener("DOMContentLoaded", loadScooters);
