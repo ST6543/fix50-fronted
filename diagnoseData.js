@@ -1,155 +1,408 @@
+// COMPLETE DIAGNOSEDATA — EXACT ZOALS JE OUDE SYSTEEM
+
 const diagnoseData = {
     "Start niet": {
         oorzaken: [
-            "Geen vonk", "Geen brandstof", "Lage compressie",
-            "Verkeerde timing", "Verstopte carburateur",
-            "Startmotor draait niet/ te langzaam"
+            "Startmotor draait niet/ te langzaam",
+            "Geen vonk",
+            "Geen brandstof",
+            "Verstopte carburateur",
+            "Lage compressie",
+            "Verkeerde timing"
         ],
         tests: [
-            "Bougie eruit, vonk checken",
-            "Brandstofslang los, flow check",
-            "Compressietest",
-            "Carburateur inspectie",
-            "Startmotor op 12V testen"
+            "Meet spanning op startmotor",
+            "Controleer bougie op vonk",
+            "Controleer brandstofkraan/vacuüm",
+            "Controleer carburateur op verstopping"
         ],
         oplossingen: [
-            "Bobine/CDI/bougie vervangen",
+            "Startmotor reviseren",
+            "Bougie vervangen",
             "Carburateur reinigen",
-            "Kleppen stellen (4T)",
-            "Cilinder/zuiger vervangen",
-            "Startmotor reviseren"
+            "Brandstofsysteem controleren"
         ],
         blok: [
-            "GY6: klepspeling, choke, vacuüm",
-            "Piaggio 2T: membraan, keerringen",
-            "AM6: keerring versnellingsbakzijde",
-            "Tomos: punten/condensator"
+            "Controleer klepspeling (4T)",
+            "Controleer compressie"
         ]
     },
 
     "Slaat af bij gas geven": {
-        oorzaken: ["Te arm mengsel", "Vacuümlek", "Carburateur vervuild", "Te weinig brandstofaanvoer"],
-        tests: ["Remmenreiniger rond spruitstuk", "Sproeiers controleren", "Brandstofdoorstroming testen"],
-        oplossingen: ["Carburateur reinigen", "Spruitstuk vervangen", "Brandstofkraan/pomp vervangen"],
-        blok: ["GY6: vacuümpomp/choke", "Piaggio 2T: membraanplaatjes", "Tomos: sproeier verstopt door mengsmering"]
+        oorzaken: [
+            "Te weinig brandstofaanvoer",
+            "Carburateur vervuild",
+            "Vacuümlek",
+            "Te arm mengsel"
+        ],
+        tests: [
+            "Controleer vacuümslangen",
+            "Test met choke",
+            "Controleer sproeiers"
+        ],
+        oplossingen: [
+            "Carburateur reinigen",
+            "Vacuümslangen vervangen",
+            "Stationair afstellen"
+        ],
+        blok: [
+            "Controleer membraan",
+            "Controleer luchtfilter"
+        ]
     },
 
     "Loopt slecht stationair": {
-        oorzaken: ["Te arm mengsel", "Valse lucht", "Stationair sproeier verstopt", "Slechte bougie"],
-        tests: ["Stationair schroef reactie", "Remmenreiniger rond spruitstuk", "Bougie kleur check"],
-        oplossingen: ["Carburateur reinigen", "Spruitstuk vervangen", "Bougie vervangen"],
-        blok: ["4T: klepspeling", "2T: keerringen", "AM6: membraan"]
+        oorzaken: [
+            "Stationair sproeier verstopt",
+            "Valse lucht",
+            "Te arm mengsel"
+        ],
+        tests: [
+            "Test met remmenreiniger rond spruitstuk",
+            "Stationair-schroef testen",
+            "Controleer sproeiers"
+        ],
+        oplossingen: [
+            "Carburateur reinigen",
+            "Spruitstuk vervangen",
+            "Stationair afstellen"
+        ],
+        blok: [
+            "Controleer luchtfilter",
+            "Controleer membraan"
+        ]
     },
 
     "Rijdt niet harder dan 20–30 km/h": {
-        oorzaken: ["Variateur problemen", "V-snaar versleten", "Carburateur te arm", "Uitlaat verstopt"],
-        tests: ["Variateur inspectie", "Snaar meten", "Sproeier checken"],
-        oplossingen: ["Rollen/snaar vervangen", "Carburateur afstellen", "Uitlaat reinigen/vervangen"],
-        blok: ["GY6: variateurbus, snaar", "Piaggio 2T: uitlaat verstopt", "Tomos: koppeling slipt"]
+        oorzaken: [
+            "Carburateur te arm",
+            "Uitlaat verstopt",
+            "V-snaar versleten",
+            "Variateur problemen"
+        ],
+        tests: [
+            "Controleer uitlaat op verstopping",
+            "Controleer snaar",
+            "Controleer variateurrollen"
+        ],
+        oplossingen: [
+            "Uitlaat reinigen/vervangen",
+            "Snaar vervangen",
+            "Variateur reviseren"
+        ],
+        blok: [
+            "Controleer koppeling",
+            "Controleer luchtfilter"
+        ]
     },
 
     "Tikkend/ratelend geluid": {
-        oorzaken: ["Klepspeling fout (4T)", "Lagers versleten", "Koppeling versleten"],
-        tests: ["Klepspeling meten", "Zijdeksel eraf, speling controleren"],
-        oplossingen: ["Kleppen stellen", "Lagers/koppeling vervangen"],
-        blok: ["AM6: krukaslagers", "GY6: kleppen tikken", "Tomos: koppeling ratelt"]
+        oorzaken: [
+            "Koppeling versleten",
+            "Klepspeling fout (4T)",
+            "Lagers versleten"
+        ],
+        tests: [
+            "Luister bij warme motor",
+            "Controleer koppeling",
+            "Controleer klepspeling"
+        ],
+        oplossingen: [
+            "Koppeling vervangen",
+            "Kleppen stellen",
+            "Lagers vervangen"
+        ],
+        blok: [
+            "Controleer variateur",
+            "Controleer snaar"
+        ]
     },
 
     "Rookt extreem": {
-        oorzaken: ["Te veel olie (2T)", "Versleten zuigerveren", "Oliepomp verkeerd afgesteld", "Klepseals (4T)"],
-        tests: ["Compressie", "Oliepomp markeringen", "Oliepeil"],
-        oplossingen: ["Oliepomp afstellen", "Zuiger/veren vervangen", "Klepseals vervangen"],
-        blok: ["Piaggio 2T: oliepomp tandwiel", "Tomos: mengsmering te rijk"]
+        oorzaken: [
+            "Te veel olie (2T)",
+            "Klepseals (4T)",
+            "Oliepomp verkeerd afgesteld"
+        ],
+        tests: [
+            "Controleer oliepeil",
+            "Controleer rookkleur",
+            "Controleer oliepomp"
+        ],
+        oplossingen: [
+            "Oliepomp afstellen",
+            "Klepseals vervangen",
+            "Oliepeil corrigeren"
+        ],
+        blok: [
+            "Controleer luchtfilter",
+            "Controleer carburateur"
+        ]
     },
 
     "Trilt bij optrekken": {
-        oorzaken: ["Variateur", "Koppeling", "Snaar", "Motorsteunen"],
-        tests: ["Variateur/koppeling inspectie", "Snaarspanning", "Motorsteunen checken"],
-        oplossingen: ["Rollen/koppeling/snaar vervangen", "Motorsteunen vervangen"],
-        blok: ["GY6: koppeling ongelijk afgesleten", "Piaggio 2T: snaar slijt snel"]
+        oorzaken: [
+            "Motorsteunen",
+            "Variateur",
+            "Koppeling"
+        ],
+        tests: [
+            "Controleer motorsteunen",
+            "Controleer variateur",
+            "Controleer koppeling"
+        ],
+        oplossingen: [
+            "Motorsteunen vervangen",
+            "Variateur reviseren",
+            "Koppeling reinigen/vervangen"
+        ],
+        blok: [
+            "Controleer snaar",
+            "Controleer rollen"
+        ]
     },
 
     "Ploffend geluid / backfire": {
-        oorzaken: ["Te arm mengsel", "Valse lucht", "Kleppen verkeerd afgesteld (4T)", "Uitlaatpakking lek"],
-        tests: ["Bougie kleur", "Remmenreiniger test", "Klepspeling meten"],
-        oplossingen: ["Mengsel afstellen", "Pakking vervangen", "Kleppen stellen"],
-        blok: ["GY6: choke blijft hangen", "4T: kleppen stellen"]
+        oorzaken: [
+            "Kleppen verkeerd afgesteld (4T)",
+            "Uitlaatpakking lek",
+            "Te arm mengsel",
+            "Valse lucht"
+        ],
+        tests: [
+            "Controleer uitlaatpakking",
+            "Controleer klepspeling",
+            "Controleer spruitstuk"
+        ],
+        oplossingen: [
+            "Kleppen stellen",
+            "Uitlaatpakking vervangen",
+            "Spruitstuk vervangen"
+        ],
+        blok: [
+            "Controleer carburateur",
+            "Controleer luchtfilter"
+        ]
     },
 
     "Wordt te warm": {
-        oorzaken: ["Koelvloeistof laag", "Waterpomp defect", "Thermostaat vast", "Te arm mengsel"],
-        tests: ["Koelvloeistofniveau", "Waterpomp werking", "Bougie kleur"],
-        oplossingen: ["Bijvullen", "Waterpomp/thermostaat vervangen", "Mengsel afstellen"],
-        blok: ["Piaggio LC: waterpomp keerring", "AM6: waterpomp tandwiel"]
+        oorzaken: [
+            "Koelvloeistof laag",
+            "Thermostaat vast",
+            "Waterpomp defect"
+        ],
+        tests: [
+            "Controleer koelvloeistof",
+            "Test thermostaat",
+            "Controleer waterpomp"
+        ],
+        oplossingen: [
+            "Koelvloeistof bijvullen",
+            "Thermostaat vervangen",
+            "Waterpomp reviseren"
+        ],
+        blok: [
+            "Controleer radiateur",
+            "Controleer slangen"
+        ]
     },
 
     "Slaat af stationair maar rijdt goed": {
-        oorzaken: ["Stationair sproeier verstopt", "Valse lucht", "Klepspeling (4T)"],
-        tests: ["Stationair kanaal check", "Remmenreiniger test", "Klepspeling meten"],
-        oplossingen: ["Carburateur reinigen", "Spruitstuk vervangen", "Kleppen stellen"],
-        blok: ["GY6: veel voorkomend bij warme motor"]
+        oorzaken: [
+            "Stationair sproeier verstopt",
+            "Valse lucht",
+            "Klepspeling (4T)"
+        ],
+        tests: [
+            "Test met remmenreiniger",
+            "Controleer sproeiers",
+            "Controleer klepspeling"
+        ],
+        oplossingen: [
+            "Carburateur reinigen",
+            "Spruitstuk vervangen",
+            "Kleppen stellen"
+        ],
+        blok: [
+            "Controleer luchtfilter",
+            "Controleer carburateur"
+        ]
     },
 
     "Verliest vermogen warm": {
-        oorzaken: ["Bobine/CDI defect warm", "Klepspeling te klein", "Keerringen lekken warm"],
-        tests: ["Vonk warm checken", "Klepspeling meten", "Compressie warm"],
-        oplossingen: ["Bobine/CDI vervangen", "Kleppen stellen", "Keerringen vervangen"],
-        blok: ["GY6: bobine warm defect", "2T: keerringen lekken warm"]
+        oorzaken: [
+            "Bobine/CDI defect bij warmte",
+            "Klepspeling te klein",
+            "Keerringen lekken warm"
+        ],
+        tests: [
+            "Test vonk warm",
+            "Controleer klepspeling",
+            "Controleer keerringen"
+        ],
+        oplossingen: [
+            "Bobine/CDI vervangen",
+            "Kleppen stellen",
+            "Keerringen vervangen"
+        ],
+        blok: [
+            "Controleer carburateur",
+            "Controleer luchtfilter"
+        ]
     },
 
     "Onregelmatig vonkbeeld": {
-        oorzaken: ["Pickup sensor", "Massa", "Vliegwiel magneten"],
-        tests: ["Pickup weerstand", "Massa meten", "Vliegwiel inspectie"],
-        oplossingen: ["Pickup vervangen", "Massa verbeteren", "Vliegwiel vervangen"],
-        blok: ["Tomos: vliegwiel magneten zwak"]
+        oorzaken: [
+            "Pickup sensor",
+            "Massa",
+            "Vliegwiel magneten"
+        ],
+        tests: [
+            "Controleer pickup sensor",
+            "Controleer massa",
+            "Controleer vliegwiel"
+        ],
+        oplossingen: [
+            "Pickup vervangen",
+            "Massa herstellen",
+            "Vliegwiel vervangen"
+        ],
+        blok: [
+            "Controleer CDI",
+            "Controleer bobine"
+        ]
     },
 
     "Koppeling pakt laat": {
-        oorzaken: ["Versleten koppelingsveren", "Gladde platen"],
-        tests: ["Koppeling demonteren", "Veerspanning meten"],
-        oplossingen: ["Koppelingsveren/platen vervangen"],
-        blok: ["Tomos: veelvoorkomend bij oudere modellen"]
+        oorzaken: [
+            "Versleten koppelingsveren",
+            "Gladde platen"
+        ],
+        tests: [
+            "Controleer koppelingshuis",
+            "Controleer veren"
+        ],
+        oplossingen: [
+            "Veren vervangen",
+            "Platen vervangen"
+        ],
+        blok: [
+            "Controleer snaar",
+            "Controleer variateur"
+        ]
     },
 
     "Scooter schokt bij optrekken": {
-        oorzaken: ["Rollen plat", "Koppeling vervuild"],
-        tests: ["Variateur inspectie", "Koppelingshuis checken"],
-        oplossingen: ["Rollen vervangen", "Koppeling reinigen"],
-        blok: ["GY6: veelvoorkomend bij goedkope rollen"]
+        oorzaken: [
+            "Rollen plat",
+            "Koppeling vervuild"
+        ],
+        tests: [
+            "Controleer rollen",
+            "Controleer koppeling"
+        ],
+        oplossingen: [
+            "Rollen vervangen",
+            "Koppeling reinigen"
+        ],
+        blok: [
+            "Controleer snaar",
+            "Controleer variateur"
+        ]
     },
 
     "Hoge toeren maar geen snelheid": {
-        oorzaken: ["Snaar slipt", "Koppeling slipt"],
-        tests: ["Snaar inspectie", "Koppeling checken"],
-        oplossingen: ["Snaar/koppeling vervangen"],
-        blok: ["GY6: snaar rekt snel uit"]
+        oorzaken: [
+            "Snaar slipt",
+            "Koppeling slipt"
+        ],
+        tests: [
+            "Controleer snaar",
+            "Controleer koppeling"
+        ],
+        oplossingen: [
+            "Snaar vervangen",
+            "Koppeling reviseren"
+        ],
+        blok: [
+            "Controleer variateur",
+            "Controleer rollen"
+        ]
     },
 
     "Benzine loopt uit carburateur": {
-        oorzaken: ["Vlotternaald defect", "Vlotterkamer pakking lek"],
-        tests: ["Vlotterhoogte checken", "Pakking inspecteren"],
-        oplossingen: ["Vlotternaald/pakking vervangen"],
-        blok: ["Universeel probleem bij oudere carburateurs"]
+        oorzaken: [
+            "Vlotterkamer pakking lek",
+            "Vlotternaald defect"
+        ],
+        tests: [
+            "Controleer vlotterkamer",
+            "Controleer vlotternaald"
+        ],
+        oplossingen: [
+            "Pakking vervangen",
+            "Vlotternaald vervangen"
+        ],
+        blok: [
+            "Controleer carburateur",
+            "Controleer brandstofslang"
+        ]
     },
 
     "Scooter houdt in bij half gas": {
-        oorzaken: ["Te arm mengsel", "Sproeier te klein", "Membraan lekt"],
-        tests: ["Sproeiermaat checken", "Membraan inspectie"],
-        oplossingen: ["Sproeier vergroten", "Membraan vervangen"],
-        blok: ["Piaggio 2T: membraanplaatjes vaak oorzaak"]
+        oorzaken: [
+            "Te arm mengsel",
+            "Membraan lekt"
+        ],
+        tests: [
+            "Controleer sproeiers",
+            "Controleer membraan"
+        ],
+        oplossingen: [
+            "Carburateur afstellen",
+            "Membraan vervangen"
+        ],
+        blok: [
+            "Controleer luchtfilter",
+            "Controleer spruitstuk"
+        ]
     },
 
     "Geen reactie op gas": {
-        oorzaken: ["Gaskabel los", "Carburateur vacuüm", "Choke blijft hangen"],
-        tests: ["Gaskabel checken", "Vacuüm meten", "Choke inspecteren"],
-        oplossingen: ["Kabel herstellen", "Choke vervangen"],
-        blok: ["GY6: automatische choke vaak oorzaak"]
+        oorzaken: [
+            "Gaskabel los",
+            "Choke blijft hangen"
+        ],
+        tests: [
+            "Controleer gaskabel",
+            "Controleer choke"
+        ],
+        oplossingen: [
+            "Gaskabel vastzetten",
+            "Choke vervangen"
+        ],
+        blok: [
+            "Controleer carburateur",
+            "Controleer luchtfilter"
+        ]
     },
 
     "Scooter valt uit bij regen": {
-        oorzaken: ["Bougiedop nat", "Bobine nat", "Slechte massa"],
-        tests: ["Bougiedop controleren", "Bobine schoonmaken", "Massa checken"],
-        oplossingen: ["Bougiedop/bobine vervangen", "Massa verbeteren"],
-        blok: ["Tomos: open ontsteking gevoelig voor vocht"]
+        oorzaken: [
+            "Bougiedop nat",
+            "Bobine nat"
+        ],
+        tests: [
+            "Controleer bougiedop",
+            "Controleer bobine"
+        ],
+        oplossingen: [
+            "Bougiedop vervangen",
+            "Bobine afdichten"
+        ],
+        blok: [
+            "Controleer kabelboom",
+            "Controleer CDI"
+        ]
     }
 };
