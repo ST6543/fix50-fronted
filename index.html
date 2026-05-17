@@ -5,60 +5,109 @@
     <title>Fix50 – Home</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Alleen voor index: rustige animated background -->
     <style>
+        /* Rustige achtergrond */
         body {
-            background: linear-gradient(
-                135deg,
-                #0d0d0d,
-                #111827,
-                #1a1a1a,
-                #ff6600
-            );
+            background: linear-gradient(135deg, #0d0d0d, #111827, #1a1a1a, #ff6600);
             background-size: 500% 500%;
-            animation: fix50SlowGradient 35s ease-in-out infinite;
+            animation: bgMove 35s ease-in-out infinite;
+            margin: 0;
+            padding: 0;
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
-        @keyframes fix50SlowGradient {
+        @keyframes bgMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Glow animatie */
-        @keyframes cardGlow {
-            0% { box-shadow: 0 0 10px rgba(255,102,0,0.2); }
-            50% { box-shadow: 0 0 25px rgba(255,102,0,0.45); }
-            100% { box-shadow: 0 0 10px rgba(255,102,0,0.2); }
+        /* Hero sectie */
+        .hero {
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 40px;
         }
 
-        /* Klikbare home-cards */
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: #ff6600;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        /* Grid */
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        /* Kaarten */
         .home-card {
             display: block;
             background: rgba(0,0,0,0.55);
-            padding: 25px;
-            border-radius: 12px;
+            padding: 30px;
+            border-radius: 14px;
             text-decoration: none;
             color: white;
             transition: 0.25s;
             backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,102,0,0.25);
         }
 
         .home-card:hover {
             transform: translateY(-6px) scale(1.03);
             background: rgba(255,102,0,0.18);
-            animation: cardGlow 2.5s infinite ease-in-out;
+            box-shadow: 0 0 25px rgba(255,102,0,0.45);
         }
 
         .home-card h3 {
             margin-top: 0;
+            font-size: 24px;
             color: #ff6600;
-            font-size: 22px;
         }
 
         .home-card p {
             color: #ccc;
             font-size: 15px;
+        }
+
+        /* Topbar */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #111;
+            padding: 15px 25px;
+            border-bottom: 2px solid #ff6600;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            color: #ff6600;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
         }
     </style>
 </head>
@@ -78,28 +127,25 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="home-center">
-        <h1 class="home-title">Welkom bij Fix50</h1>
-        <p class="home-subtitle">Beheer, diagnoseer en onderhoud je scooter als een pro.</p>
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Welkom bij Fix50</h1>
+        <p>Beheer, diagnoseer en onderhoud je scooter als een pro.</p>
     </section>
 
-    <!-- GRID MET KAARTEN -->
+    <!-- GRID -->
     <div class="home-grid">
 
-        <!-- Diagnose -->
         <a href="diagnose.html" class="home-card">
             <h3>Diagnose</h3>
             <p>Ontdek wat er mis is met je scooter via slimme symptoomanalyse.</p>
         </a>
 
-        <!-- Onderhoudsplanner -->
         <a href="onderhoud.html" class="home-card">
             <h3>Onderhoudsplanner</h3>
             <p>Bekijk wanneer je scooter onderhoud nodig heeft en blijf veilig rijden.</p>
         </a>
 
-        <!-- Scooterbeheer -->
         <a href="scooter.html" class="home-card">
             <h3>Scooterbeheer</h3>
             <p>Beheer al je scooters overzichtelijk op één plek.</p>
