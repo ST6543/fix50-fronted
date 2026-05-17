@@ -1,8 +1,6 @@
 const API_URL = "https://fix50.onrender.com";
 
-/* ============================
-   HELPERS
-============================ */
+/* HELPERS */
 
 function getToken() {
   return localStorage.getItem("token");
@@ -23,9 +21,7 @@ async function apiFetch(path, options = {}) {
   return data;
 }
 
-/* ============================
-   SCOOTERS
-============================ */
+/* SCOOTERS */
 
 async function loadScooters() {
   const list = document.getElementById("scooter-list");
@@ -92,6 +88,7 @@ async function saveScooter() {
     document.getElementById("naam").value = "";
     document.getElementById("kenteken").value = "";
     document.getElementById("km").value = "";
+    document.getElementById("type").value = "";
 
     loadScooters();
   } catch (err) {
@@ -149,9 +146,7 @@ async function deleteScooter(id) {
   }
 }
 
-/* ============================
-   INIT
-============================ */
+/* INIT */
 
 window.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("scooter-list")) loadScooters();
