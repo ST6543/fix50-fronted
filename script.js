@@ -1,4 +1,3 @@
-
 // JUISTE BACKEND-URL
 const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
 
@@ -32,7 +31,7 @@ async function apiFetch(path, options = {}) {
 
 /* ============================================
    SCOOTERS
-   ============================================ */
+============================================ */
 
 // Scooters laden
 async function loadScooters() {
@@ -87,7 +86,8 @@ async function saveScooter() {
   msg.textContent = "";
   msg.style.color = "red";
 
-  if (!naam || !kenteken || !km) {
+  // FIX: km mag 0 zijn → check op isNaN
+  if (!naam || !kenteken || isNaN(km)) {
     msg.textContent = "Alle velden zijn verplicht.";
     return;
   }
@@ -157,7 +157,7 @@ async function deleteScooter(id) {
 
 /* ============================================
    ONDERHOUD
-   ============================================ */
+============================================ */
 
 async function saveMaintenanceSettings() {
   const kmPerWeek = Number(document.getElementById("kmPerWeek").value);
