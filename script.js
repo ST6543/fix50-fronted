@@ -19,6 +19,10 @@ async function apiFetch(path, options = {}) {
   return data;
 }
 
+/* ============================
+   SCOOTERS
+============================ */
+
 async function loadScooters() {
   const list = document.getElementById("scooter-list");
   if (!list) return;
