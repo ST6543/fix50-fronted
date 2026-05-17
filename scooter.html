@@ -1,42 +1,76 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>Mijn scooters</title>
+    <meta charset="UTF-8">
+    <title>Scooters – Fix50</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="scooter.css">
 </head>
+
 <body>
 
-  <h1>Mijn scooters</h1>
+<header class="topbar">
+    <a href="index.html" class="logo-container">
+        <img src="logo.png" class="logo">
+        <span class="logo-text">Fix50</span>
+    </a>
 
-  <div>
-    <input id="naam" placeholder="Naam scooter">
-    <input id="kenteken" placeholder="Kenteken">
-    <input id="km" type="number" placeholder="Kilometerstand">
-    <button type="button" onclick="saveScooter()">Opslaan</button>
-    <p id="message"></p>
-  </div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a class="active" href="scooter.html">Scooters</a>
+        <a href="onderhoud.html">Onderhoud</a>
+        <a href="diagnose.html">Diagnose</a>
+        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
+    </nav>
+</header>
 
-  <h2>Overzicht</h2>
-  <div id="scooter-list"></div>
+<section class="page-container">
 
-  <div id="edit-popup" style="display:none;">
-    <h3>Scooter bewerken</h3>
-    <input id="edit-id" type="hidden">
-    <input id="edit-naam" placeholder="Naam">
-    <input id="edit-kenteken" placeholder="Kenteken">
-    <input id="edit-km" type="number" placeholder="Kilometerstand">
-    <button type="button" onclick="updateScooter()">Opslaan</button>
-    <button type="button" onclick="document.getElementById('edit-popup').style.display='none'">Annuleren</button>
-  </div>
+    <h1 class="title">Scooter toevoegen</h1>
 
-  <!-- BELANGRIJK: script.js MOET HIER STAAN -->
-  <script src="script.js"></script>
+    <div class="form-card">
+        <input id="naam" placeholder="Scooter naam">
+        <input id="kenteken" placeholder="Kenteken">
+        <input id="km" placeholder="Kilometerstand" type="number">
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      loadScooters();
-    });
-  </script>
+        <select id="type">
+            <option value="2T">2‑takt</option>
+            <option value="4T">4‑takt</option>
+        </select>
+
+        <button onclick="saveScooter()">Opslaan</button>
+        <p id="message"></p>
+    </div>
+
+    <h1 class="title">Jouw scooters</h1>
+
+    <div id="scooter-list" class="scooter-grid"></div>
+
+</section>
+
+<!-- BEWERKEN POPUP -->
+<div id="edit-popup" class="popup hidden">
+    <div class="popup-content">
+        <h2>Scooter bewerken</h2>
+
+        <input id="edit-naam" placeholder="Naam">
+        <input id="edit-kenteken" placeholder="Kenteken">
+        <input id="edit-km" placeholder="Kilometerstand" type="number">
+
+        <select id="edit-type">
+            <option value="2T">2‑takt</option>
+            <option value="4T">4‑takt</option>
+        </select>
+
+        <input type="hidden" id="edit-id">
+
+        <button onclick="updateScooter()">Opslaan</button>
+        <button class="danger" onclick="closePopup()">Annuleren</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>loadScooters();</script>
 
 </body>
 </html>
