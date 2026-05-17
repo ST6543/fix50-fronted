@@ -1,5 +1,9 @@
 const API_URL = "https://fix50.onrender.com";
 
+/* ============================
+   HELPERS
+============================ */
+
 function getToken() {
   return localStorage.getItem("token");
 }
@@ -27,7 +31,7 @@ async function loadScooters() {
   const list = document.getElementById("scooter-list");
   if (!list) return;
 
-  list.innerHTML = "Laden...";
+  list.innerHTML = "<p style='color:#ff6600;'>Laden...</p>";
 
   try {
     const scooters = await apiFetch("/api/scooters");
@@ -39,16 +43,22 @@ async function loadScooters() {
 
     list.innerHTML = "";
     scooters.forEach(s => {
-      const div = document.createElement("div");
-      div.innerHTML = `
-        <strong>${s.naam}</strong><br>
-        Kenteken: ${s.kenteken}<br>
-        Km: ${s.km}<br>
-        <button onclick="openEditScooter(${s.id}, '${s.naam}', '${s.kenteken}', ${s.km})">Bewerken</button>
-        <button onclick="deleteScooter(${s.id})">Verwijderen</button>
-        <hr>
+      const card = document.createElement("div");
+      card.className = "scooter-card";
+
+      card.innerHTML = `
+        <h3>${s.naam}</h3>
+        <p><strong>Kenteken:</strong> ${s.kenteken}</p>
+        <p><strong>Kilometers:</strong> ${s.km}</p>
+        <p><strong>Type:</strong> ${s.type}</p>
+
+        <div class="card-buttons">
+            <button class="edit-btn" onclick="openEditScooter(${s.id}, '${s.naam}', '${s.kenteken}', ${s.km}, '${s.type}')">Bewerken</button>
+            <button class="delete-btn" onclick="deleteScooter(${s.id})">Verwijderen</button>
+        </div>
       `;
-      list.appendChild(div);
+
+      list.appendChild(card);
     });
   } catch (err) {
     list.innerHTML = `<p style="color:red;">${err.message}</p>`;
@@ -59,12 +69,13 @@ async function saveScooter() {
   const naam = document.getElementById("naam").value.trim();
   const kenteken = document.getElementById("kenteken").value.trim();
   const km = Number(document.getElementById("km").value);
+  const type = document.getElementById("type").value;
   const msg = document.getElementById("message");
 
   msg.textContent = "";
   msg.style.color = "red";
 
-  if (!naam || !kenteken || isNaN(km)) {
+  if (!naam || !kenteken || isNaN(km) || !type) {
     msg.textContent = "Alle velden zijn verplicht.";
     return;
   }
@@ -72,7 +83,7 @@ async function saveScooter() {
   try {
     await apiFetch("/api/scooters", {
       method: "POST",
-      body: JSON.stringify({ naam, kenteken, km })
+      body: JSON.stringify({ naam, kenteken, km, type })
     });
 
     msg.style.color = "green";
@@ -88,12 +99,18 @@ async function saveScooter() {
   }
 }
 
-function openEditScooter(id, naam, kenteken, km) {
+function openEditScooter(id, naam, kenteken, km, type) {
   document.getElementById("edit-id").value = id;
   document.getElementById("edit-naam").value = naam;
   document.getElementById("edit-kenteken").value = kenteken;
   document.getElementById("edit-km").value = km;
-  document.getElementById("edit-popup").style.display = "block";
+  document.getElementById("edit-type").value = type;
+
+  document.getElementById("edit-popup").classList.remove("hidden");
+}
+
+function closePopup() {
+  document.getElementById("edit-popup").classList.add("hidden");
 }
 
 async function updateScooter() {
@@ -101,14 +118,20 @@ async function updateScooter() {
   const naam = document.getElementById("edit-naam").value.trim();
   const kenteken = document.getElementById("edit-kenteken").value.trim();
   const km = Number(document.getElementById("edit-km").value);
+  const type = document.getElementById("edit-type").value;
+
+  if (!naam || !kenteken || isNaN(km) || !type) {
+    alert("Alle velden zijn verplicht.");
+    return;
+  }
 
   try {
     await apiFetch(`/api/scooters/${id}`, {
       method: "PUT",
-      body: JSON.stringify({ naam, kenteken, km })
+      body: JSON.stringify({ naam, kenteken, km, type })
     });
 
-    document.getElementById("edit-popup").style.display = "none";
+    closePopup();
     loadScooters();
   } catch (err) {
     alert(err.message);
@@ -125,3 +148,11 @@ async function deleteScooter(id) {
     alert(err.message);
   }
 }
+
+/* ============================
+   INIT
+============================ */
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("scooter-list")) loadScooters();
+});
