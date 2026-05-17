@@ -1,4 +1,19 @@
 const API_URL = "https://fix50.onrender.com";
+/* ============================
+   LOGIN CHECK
+============================ */
+
+const protectedPages = ["scooter.html", "onderhoud.html"];
+
+const currentPage = location.pathname.split("/").pop();
+
+if (protectedPages.includes(currentPage)) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        location.href = "login.html";
+    }
+}
+
 
 /* HELPERS */
 
