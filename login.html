@@ -2,72 +2,68 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Inloggen - Fix50</title>
+    <title>Login – Fix50</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="index-bg">
 
 <header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" alt="Fix50 logo" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
-
-    <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="register.html">Registreren</a>
-    </nav>
+    <span class="logo-text">Fix50</span>
 </header>
 
-<section class="form-container">
-    <h2>Inloggen</h2>
+<section class="hero">
+    <h1>Inloggen</h1>
+    <p>Log in om je scooters te beheren.</p>
+</section>
 
+<div class="form-card">
     <input id="email" type="email" placeholder="E-mail">
     <input id="password" type="password" placeholder="Wachtwoord">
 
     <button onclick="login()">Inloggen</button>
 
-    <p id="message"></p>
-</section>
+    <p id="login-msg"></p>
+
+    <p style="text-align:center; margin-top:10px;">
+        Nog geen account? <a href="register.html" style="color:#ff6600;">Registreren</a>
+    </p>
+</div>
 
 <script>
-const API_BASE = "https://fix50.onrender.com"; // JUISTE BACKEND
-
 async function login() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    const msg = document.getElementById("message");
+    const msg = document.getElementById("login-msg");
 
-    msg.innerText = "";
+    msg.textContent = "";
+    msg.style.color = "red";
 
     if (!email || !password) {
-        msg.innerText = "Vul alle velden in.";
+        msg.textContent = "Vul alle velden in.";
         return;
     }
 
     try {
-        const res = await fetch(`${API_BASE}/api/login`, {
+        const res = await fetch("https://fix50.onrender.com/api/auth/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ email, password })
         });
 
         const data = await res.json();
 
-        if (!res.ok) {
-            msg.innerText = data.error || "Onjuiste gegevens.";
-            return;
-        }
+        if (!res.ok) throw new Error(data.error || "Login mislukt");
 
-        // TOKEN OPSLAAN
         localStorage.setItem("token", data.token);
 
-        // DOOR NAAR SCOOTERS
-        window.location.href = "scooter.html";
+        msg.style.color = "green";
+        msg.textContent = "Succesvol ingelogd!";
+
+        setTimeout(() => location.href = "scooter.html", 500);
 
     } catch (err) {
-        msg.innerText = "Server niet bereikbaar.";
+        msg.textContent = err.message;
     }
 }
 </script>
