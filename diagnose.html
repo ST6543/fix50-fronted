@@ -2,18 +2,14 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Diagnose - Fix50</title>
+    <title>Diagnose – Fix50</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="diagnose.css">
 </head>
 
-<body>
+<body class="index-bg">
 
 <header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" alt="Fix50 logo" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
+    <span class="logo-text">Fix50</span>
 
     <nav class="nav-links">
         <a href="index.html">Home</a>
@@ -24,29 +20,39 @@
     </nav>
 </header>
 
-<section class="symptom-cards">
-    <h1 class="diag-title">Kies je probleem</h1>
-
-    <div class="symptom-grid" id="symptomGrid"></div>
+<section class="hero">
+    <h1>Diagnose</h1>
+    <p>Kies een symptoom om te beginnen.</p>
 </section>
 
-<!-- Wizard -->
-<div id="wizard" class="hidden"></div>
+<div class="home-grid">
 
-<script src="diagnoseData.js"></script>
-<script src="diagnoseFlow.js"></script>
+    <div class="home-card" onclick="startWizard('start-niet')">
+        <h3>Start niet</h3>
+        <p>Motor draait niet of slaat niet aan.</p>
+    </div>
+
+    <div class="home-card" onclick="startWizard('valt-uit')">
+        <h3>Valt uit</h3>
+        <p>Scooter stopt tijdens het rijden.</p>
+    </div>
+
+    <div class="home-card" onclick="startWizard('slecht-trekken')">
+        <h3>Slecht optrekken</h3>
+        <p>Vermogen of snelheid ontbreekt.</p>
+    </div>
+
+    <div class="home-card" onclick="startWizard('raar-geluid')">
+        <h3>Raar geluid</h3>
+        <p>Tikken, ratelen of schrapen.</p>
+    </div>
+
+</div>
 
 <script>
-// AUTOMATISCH ALLE SYMPTOMEN LADEN
-const grid = document.getElementById("symptomGrid");
-const symptoms = Object.keys(diagnoseData);
-
-grid.innerHTML = symptoms.map(sym => `
-    <div class="symptom-card" onclick="startDiagnosis('${sym}')">
-        <h3>${sym}</h3>
-        <p>${diagnoseData[sym].oorzaken[0]}</p>
-    </div>
-`).join("");
+function startWizard(symptoom) {
+    alert("Diagnose start voor: " + symptoom);
+}
 </script>
 
 </body>
