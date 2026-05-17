@@ -1,12 +1,14 @@
 const API_URL = "https://fix50.onrender.com";
+
 /* ============================
-   LOGIN CHECK
+   LOGIN CHECK (PROFESSIONEEL)
 ============================ */
 
 const protectedPages = ["scooter.html", "onderhoud.html"];
 
-const currentPage = location.pathname.split("/").pop();
+const currentPage = location.pathname.split("/").pop().toLowerCase();
 
+// Als pagina beveiligd is → check token
 if (protectedPages.includes(currentPage)) {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -14,8 +16,9 @@ if (protectedPages.includes(currentPage)) {
     }
 }
 
-
-/* HELPERS */
+/* ============================
+   HELPERS
+============================ */
 
 function getToken() {
   return localStorage.getItem("token");
@@ -30,13 +33,23 @@ async function apiFetch(path, options = {}) {
     headers["Content-Type"] = "application/json";
 
   const res = await fetch(API_URL + path, { ...options, headers });
+
+  // Als token ongeldig is → redirect naar login
+  if (res.status === 401) {
+    localStorage.removeItem("token");
+    location.href = "login.html";
+    return;
+  }
+
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) throw new Error(data.error || "Er ging iets mis");
   return data;
 }
 
-/* SCOOTERS */
+/* ============================
+   SCOOTERS
+============================ */
 
 async function loadScooters() {
   const list = document.getElementById("scooter-list");
@@ -161,7 +174,9 @@ async function deleteScooter(id) {
   }
 }
 
-/* INIT */
+/* ============================
+   INIT
+============================ */
 
 window.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("scooter-list")) loadScooters();
