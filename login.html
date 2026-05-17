@@ -8,7 +8,6 @@
 
 <body>
 
-<!-- NIEUWE STRAKKE HEADER -->
 <header class="topbar">
     <a href="index.html" class="logo-container">
         <img src="logo.png" alt="Fix50 logo" class="logo">
@@ -33,14 +32,17 @@
 </section>
 
 <script>
-const API_BASE = "https://fix50-backend-login-en-registratie.onrender.com";
+const API_BASE = "https://fix50.onrender.com"; // JUISTE BACKEND
 
 async function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const msg = document.getElementById("message");
+
+    msg.innerText = "";
 
     if (!email || !password) {
-        document.getElementById("message").innerText = "Vul alle velden in.";
+        msg.innerText = "Vul alle velden in.";
         return;
     }
 
@@ -53,14 +55,19 @@ async function login() {
 
         const data = await res.json();
 
-        if (data.token) {
-            localStorage.setItem("token", data.token);
-            window.location.href = "scooter.html";
-        } else {
-            document.getElementById("message").innerText = data.error || "Onjuiste gegevens.";
+        if (!res.ok) {
+            msg.innerText = data.error || "Onjuiste gegevens.";
+            return;
         }
+
+        // TOKEN OPSLAAN
+        localStorage.setItem("token", data.token);
+
+        // DOOR NAAR SCOOTERS
+        window.location.href = "scooter.html";
+
     } catch (err) {
-        document.getElementById("message").innerText = "Server niet bereikbaar.";
+        msg.innerText = "Server niet bereikbaar.";
     }
 }
 </script>
