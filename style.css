@@ -1,34 +1,46 @@
-/* ------------------------------
-   ALGEMENE STYLING
------------------------------- */
+/* =========================================
+   GLOBAL + ANIMATED BACKGROUND
+========================================= */
+
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-
-    /* Nieuwe achtergrond */
-    background: linear-gradient(
-        180deg,
-        #1a1a1a 0%,
-        #2a2a2a 40%,
-        #1a1a1a 100%
-    );
-
     color: white;
+
+    /* ANIMATED GRADIENT BACKGROUND */
+    background: linear-gradient(
+        135deg,
+        #0d0d0d,
+        #1a1a1a,
+        #0b0f1a,
+        #ff6600
+    );
+    background-size: 400% 400%;
+    animation: fix50Gradient 12s ease infinite;
+}
+
+@keyframes fix50Gradient {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
 }
 
 
-/* ------------------------------
-   HEADER
------------------------------- */
+/* =========================================
+   HEADER / NAVBAR
+========================================= */
 
 .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111;
+    background: rgba(0,0,0,0.65);
     padding: 12px 25px;
     border-bottom: 2px solid #ff6600;
+    backdrop-filter: blur(6px);
 }
 
 .logo-container {
@@ -39,7 +51,7 @@ body {
 }
 
 .logo {
-    height: 55px;      /* PERFECTE GROOTTE VOOR HEADER */
+    height: 55px;
     width: auto;
     cursor: pointer;
 }
@@ -64,18 +76,44 @@ body {
 }
 
 
-/* ------------------------------
+/* =========================================
+   PAGE CONTAINER
+========================================= */
+
+.page-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+
+/* =========================================
+   TITLES
+========================================= */
+
+.page-title,
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: #ff6600;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
    LOGIN / REGISTER
------------------------------- */
+========================================= */
 
 .form-container {
     width: 350px;
     margin: 80px auto;
-    background: #1b1b1b;
+    background: rgba(0,0,0,0.65);
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 0 10px #000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
 }
 
 .form-container h2 {
@@ -89,7 +127,7 @@ body {
     margin: 10px 0;
     border: none;
     border-radius: 6px;
-    background: #333;
+    background: #222;
     color: white;
     font-size: 16px;
 }
@@ -117,17 +155,18 @@ body {
 }
 
 
-/* ------------------------------
-   ALGEMENE CARDS
------------------------------- */
+/* =========================================
+   GENERAL CARDS
+========================================= */
 
 .card {
-    background: #1b1b1b;
+    background: rgba(0,0,0,0.65);
     padding: 20px;
     margin: 15px auto;
     width: 90%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #000;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
 }
 
 .card h3 {
@@ -136,33 +175,180 @@ body {
 }
 
 
-/* ------------------------------
-   PAGINA TITELS
------------------------------- */
+/* =========================================
+   SCOOTER FORM (compact)
+========================================= */
 
-.page-title {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 28px;
-    color: #ff6600;
+.form-card {
+    background: rgba(0,0,0,0.65);
+    border: 2px solid #ff6600;
+    padding: 14px;
+    border-radius: 10px;
+    max-width: 330px;
+    margin: 0 auto 25px;
+    backdrop-filter: blur(6px);
+}
+
+.form-card input,
+.form-card select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: white;
+    font-size: 14px;
+}
+
+.form-card button {
+    width: 100%;
+    background: #ff6600;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.form-card button:hover {
+    background: #ff7f2a;
 }
 
 
-/* ------------------------------
+/* =========================================
+   SCOOTER GRID + CARDS
+========================================= */
+
+.scooter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.scooter-card {
+    background: rgba(0,0,0,0.65);
+    border: 2px solid #ff6600;
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.2s;
+    backdrop-filter: blur(6px);
+}
+
+.scooter-card:hover {
+    transform: scale(1.03);
+    background: #ff6600;
+    color: black;
+}
+
+.scooter-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.card-buttons button {
+    flex: 1;
+    margin: 0 4px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background: #ffaa00;
+}
+
+.delete-btn {
+    background: #ff3300;
+    color: white;
+}
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: rgba(0,0,0,0.75);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ff6600;
+    width: 320px;
+    backdrop-filter: blur(8px);
+}
+
+.popup-content input,
+.popup-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: white;
+}
+
+.popup-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.danger {
+    background: #ff3300;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================
    HOMEPAGE
------------------------------- */
+========================================= */
 
 .home-center {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 60px;
+    padding: 40px 0;
+    background: radial-gradient(circle at center, #222 0%, #111 70%);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
 }
 
 .home-logo {
     width: 220px;
     height: auto;
     margin-bottom: 25px;
-
-    /* Premium glow + lichte boost */
     filter:
         drop-shadow(0 0 25px rgba(255, 102, 0, 0.35))
         brightness(1.25)
@@ -191,13 +377,12 @@ body {
 }
 
 .home-card {
-    background: #1b1b1b;
+    background: rgba(0,0,0,0.65);
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 0 12px #000;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
     cursor: pointer;
     transition: 0.2s;
-    text-align: left;
 }
 
 .home-card:hover {
@@ -214,120 +399,4 @@ body {
 .home-card p {
     color: #ccc;
     font-size: 15px;
-}
-
-
-/* ------------------------------
-   DIAGNOSE TITEL
------------------------------- */
-
-.diag-title {
-    text-align: center;
-    font-size: 32px;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    color: #ff6600;
-    text-shadow: 0 0 10px #000;
-}
-
-
-/* ------------------------------
-   SYMPTOMEN GRID
------------------------------- */
-
-.symptom-cards {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.symptom-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-bottom: 60px;
-}
-
-
-/* ------------------------------
-   SYMPTOM KAARTEN
------------------------------- */
-
-.symptom-card {
-    background: #1b1b1b;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #000;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.symptom-card:hover {
-    transform: translateY(-5px);
-    background: #222;
-}
-
-.symptom-card h3 {
-    margin-top: 0;
-    color: #ff6600;
-    font-size: 22px;
-}
-
-.symptom-card p {
-    color: #ccc;
-    font-size: 15px;
-}
-
-
-/* ------------------------------
-   DIAGNOSE WIZARD
------------------------------- */
-
-#wizard {
-    width: 90%;
-    max-width: 700px;
-    margin: 40px auto;
-    background: #1b1b1b;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #000;
-}
-
-.hidden {
-    display: none;
-}
-
-#wizard h2 {
-    color: #ff6600;
-    margin-top: 0;
-}
-
-#wizard button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background: #ff6600;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-#wizard button:hover {
-
-.home-center {
-    text-align: center;
-    margin-top: 60px;
-    padding: 40px 0;
-    background: radial-gradient(circle at center, #222 0%, #111 70%);
-    border-radius: 20px;
-    width: 90%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 40px rgba(0,0,0,0.6);
-}
-
-    background: #ff7f2a;
 }
