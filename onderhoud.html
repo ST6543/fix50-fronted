@@ -2,20 +2,13 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Onderhoud - Fix50</title>
+    <title>Onderhoud – Fix50</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="onderhoud.css">
 </head>
 
 <body>
 
-<!-- LOGIN CHECK -->
-<script>
-  if (!localStorage.getItem("token")) {
-    window.location.href = "login.html";
-  }
-</script>
-
-<!-- NIEUWE STRAKKE HEADER -->
 <header class="topbar">
     <a href="index.html" class="logo-container">
         <img src="logo.png" alt="Fix50 logo" class="logo">
@@ -25,38 +18,33 @@
     <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="scooter.html">Scooters</a>
-        <a href="onderhoud.html">Onderhoud</a>
+        <a class="active" href="onderhoud.html">Onderhoud</a>
         <a href="diagnose.html">Diagnose</a>
         <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
     </nav>
 </header>
 
-<section class="content">
+<section class="onderhoud-container">
+    <h1>Onderhoudsadvies</h1>
 
-    <h2 class="page-title">Onderhoudsinstellingen</h2>
+    <label>Scooter</label>
+    <select id="scooterSelect"></select>
 
-    <div class="form-container">
-        <input id="kmPerWeek" type="number" placeholder="Kilometers per week">
-        <input id="huidigeKm" type="number" placeholder="Huidige kilometerstand">
+    <label>Type motor</label>
+    <select id="motorType">
+        <option value="2T">2‑takt</option>
+        <option value="4T">4‑takt</option>
+    </select>
 
-        <div class="radio-group">
-            <label><input type="radio" name="type" value="2T"> 2T</label>
-            <label><input type="radio" name="type" value="4T"> 4T</label>
-        </div>
+    <label>Kilometers per dag</label>
+    <input type="number" id="kmPerDag" placeholder="Bijv. 20">
 
-        <button onclick="saveMaintenanceSettings()">Opslaan</button>
-        <p id="maint-message"></p>
-    </div>
+    <button onclick="berekenOnderhoud()">Bereken onderhoud</button>
 
-    <h2 class="page-title">Onderhoudsadvies</h2>
-    <div id="maintenance-list"></div>
-
+    <div id="resultaat"></div>
 </section>
 
-<script src="script.js"></script>
-<script>
-    loadMaintenanceAdvice();
-</script>
+<script src="onderhoud.js"></script>
 
 </body>
 </html>
