@@ -4,115 +4,9 @@
     <meta charset="UTF-8">
     <title>Fix50 – Home</title>
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Rustige achtergrond */
-        body {
-            background: linear-gradient(135deg, #0d0d0d, #111827, #1a1a1a, #ff6600);
-            background-size: 500% 500%;
-            animation: bgMove 35s ease-in-out infinite;
-            margin: 0;
-            padding: 0;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Hero sectie */
-        .hero {
-            text-align: center;
-            margin-top: 60px;
-            margin-bottom: 40px;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            font-weight: 800;
-            color: #ff6600;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #ccc;
-        }
-
-        /* Grid */
-        .home-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto 80px;
-        }
-
-        /* Kaarten */
-        .home-card {
-            display: block;
-            background: rgba(0,0,0,0.55);
-            padding: 30px;
-            border-radius: 14px;
-            text-decoration: none;
-            color: white;
-            transition: 0.25s;
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255,102,0,0.25);
-        }
-
-        .home-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            background: rgba(255,102,0,0.18);
-            box-shadow: 0 0 25px rgba(255,102,0,0.45);
-        }
-
-        .home-card h3 {
-            margin-top: 0;
-            font-size: 24px;
-            color: #ff6600;
-        }
-
-        .home-card p {
-            color: #ccc;
-            font-size: 15px;
-        }
-
-        /* Topbar */
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #111;
-            padding: 15px 25px;
-            border-bottom: 2px solid #ff6600;
-        }
-
-        .logo-text {
-            font-size: 26px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .nav-links a {
-            margin-left: 20px;
-            color: #ff6600;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-    </style>
 </head>
 
-<body>
+<body class="index-bg">
 
     <!-- TOPBAR -->
     <header class="topbar">
@@ -131,6 +25,13 @@
     <section class="hero">
         <h1>Welkom bij Fix50</h1>
         <p>Beheer, diagnoseer en onderhoud je scooter als een pro.</p>
+    </section>
+
+    <!-- MIDDENBANNER -->
+    <section class="cta-banner">
+        <h2>Start direct met een slimme diagnose</h2>
+        <p>Ontdek binnen enkele stappen wat er mis is met je scooter.</p>
+        <a href="diagnose.html" class="cta-button">Start Diagnose</a>
     </section>
 
     <!-- GRID -->
