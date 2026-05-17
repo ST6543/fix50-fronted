@@ -1,5 +1,5 @@
 /* =========================================
-   GLOBAL + ANIMATED BACKGROUND
+   GLOBAL + EXTREME SLOW ANIMATED BACKGROUND
 ========================================= */
 
 body {
@@ -8,39 +8,36 @@ body {
     font-family: Arial, sans-serif;
     color: white;
 
-    /* ANIMATED GRADIENT BACKGROUND */
+    /* Rustige premium gradient */
     background: linear-gradient(
         135deg,
         #0d0d0d,
+        #111827,
         #1a1a1a,
-        #0b0f1a,
         #ff6600
     );
-    background-size: 400% 400%;
-    animation: fix50Gradient 12s ease infinite;
+    background-size: 500% 500%;
+    animation: fix50SlowGradient 35s ease-in-out infinite;
 }
 
-@keyframes fix50Gradient {
+@keyframes fix50SlowGradient {
     0% { background-position: 0% 50%; }
-    25% { background-position: 50% 100%; }
     50% { background-position: 100% 50%; }
-    75% { background-position: 50% 0%; }
     100% { background-position: 0% 50%; }
 }
 
 
 /* =========================================
-   HEADER / NAVBAR
+   TOPBAR (NIET MEERKLEUREN)
 ========================================= */
 
 .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(0,0,0,0.65);
+    background: #111;
     padding: 12px 25px;
     border-bottom: 2px solid #ff6600;
-    backdrop-filter: blur(6px);
 }
 
 .logo-container {
@@ -53,14 +50,12 @@ body {
 .logo {
     height: 55px;
     width: auto;
-    cursor: pointer;
 }
 
 .logo-text {
     font-size: 26px;
     font-weight: 700;
     color: white;
-    letter-spacing: 1px;
 }
 
 .nav-links a {
@@ -91,8 +86,8 @@ body {
    TITLES
 ========================================= */
 
-.page-title,
-.title {
+.title,
+.page-title {
     text-align: center;
     font-size: 30px;
     font-weight: 800;
@@ -108,7 +103,7 @@ body {
 .form-container {
     width: 350px;
     margin: 80px auto;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.55);
     padding: 30px;
     border-radius: 12px;
     text-align: center;
@@ -160,7 +155,7 @@ body {
 ========================================= */
 
 .card {
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.55);
     padding: 20px;
     margin: 15px auto;
     width: 90%;
@@ -180,7 +175,7 @@ body {
 ========================================= */
 
 .form-card {
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.55);
     border: 2px solid #ff6600;
     padding: 14px;
     border-radius: 10px;
@@ -209,7 +204,6 @@ body {
     border-radius: 8px;
     font-size: 15px;
     cursor: pointer;
-    margin-top: 5px;
 }
 
 .form-card button:hover {
@@ -228,7 +222,7 @@ body {
 }
 
 .scooter-card {
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.55);
     border: 2px solid #ff6600;
     padding: 15px;
     border-radius: 10px;
@@ -240,11 +234,6 @@ body {
     transform: scale(1.03);
     background: #ff6600;
     color: black;
-}
-
-.scooter-card h3 {
-    margin-bottom: 8px;
-    font-size: 18px;
 }
 
 .card-buttons {
@@ -260,7 +249,6 @@ body {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
 }
 
 .edit-btn {
@@ -325,78 +313,4 @@ body {
 
 .hidden {
     display: none;
-}
-
-
-/* =========================================
-   HOMEPAGE
-========================================= */
-
-.home-center {
-    text-align: center;
-    margin-top: 60px;
-    padding: 40px 0;
-    background: radial-gradient(circle at center, #222 0%, #111 70%);
-    border-radius: 20px;
-    width: 90%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 40px rgba(0,0,0,0.6);
-}
-
-.home-logo {
-    width: 220px;
-    height: auto;
-    margin-bottom: 25px;
-    filter:
-        drop-shadow(0 0 25px rgba(255, 102, 0, 0.35))
-        brightness(1.25)
-        contrast(1.1);
-}
-
-.home-title {
-    font-size: 30px;
-    color: #ff6600;
-    margin: 10px 0 5px 0;
-}
-
-.home-subtitle {
-    font-size: 18px;
-    color: #ccc;
-    margin-bottom: 40px;
-}
-
-.home-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    width: 90%;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.home-card {
-    background: rgba(0,0,0,0.65);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.6);
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.home-card:hover {
-    transform: translateY(-5px);
-    background: #222;
-}
-
-.home-card h3 {
-    margin-top: 0;
-    color: #ff6600;
-    font-size: 22px;
-}
-
-.home-card p {
-    color: #ccc;
-    font-size: 15px;
 }
