@@ -2,24 +2,50 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Fix50 – Home</title>
+    <title>Fix50 – Slimme Scooterhulp</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
 
-<header>
-    <img src="logo.png" alt="Fix50 Logo">
+<header class="topbar">
+    <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Fix50 logo" class="logo">
+        <span class="logo-text">Fix50</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="login.html">Inloggen</a>
+        <a href="register.html">Registreren</a>
+    </nav>
 </header>
 
-<div class="form-container">
-    <h2>Welkom bij Fix50</h2>
+<section class="hero">
+    <h1>Los scooterproblemen op in minuten</h1>
+    <p>Fix50 helpt je met slimme diagnose, onderhoudsadvies en het beheren van al je scooters op één plek.</p>
 
-    <p>Beheer je scooters, onderhoud en diagnose eenvoudig op één plek.</p>
+    <button class="cta-btn" onclick="location.href='diagnose.html'">
+        Start Diagnose
+    </button>
+</section>
 
-    <button onclick="location.href='login.html'">Inloggen</button>
-    <button onclick="location.href='register.html'">Account aanmaken</button>
-</div>
+<section class="features">
+    <div class="feature-card">
+        <h3>🔧 Slimme Diagnose</h3>
+        <p>Doorloop een interactieve wizard en ontdek binnen enkele minuten de meest waarschijnlijke oorzaken van jouw scooterprobleem.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🛠 Onderhoudsplanner</h3>
+        <p>Ontvang automatisch onderhoudsadvies op basis van jouw kilometers, rijstijl en scooter‑type.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📋 Scooterbeheer</h3>
+        <p>Beheer eenvoudig al je scooters, kilometerstanden en onderhoudsgegevens in één overzicht.</p>
+    </div>
+</section>
 
 </body>
 </html>
