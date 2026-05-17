@@ -28,7 +28,7 @@ body {
 
 
 /* =========================================
-   TOPBAR (NIET MEERKLEUREN)
+   TOPBAR (NIET MEE-ANIMEREN)
 ========================================= */
 
 .topbar {
@@ -79,6 +79,9 @@ body {
     max-width: 900px;
     margin: 40px auto;
     padding: 0 15px;
+
+    /* BELANGRIJK: transparant zodat achtergrond zichtbaar blijft */
+    background: transparent;
 }
 
 
@@ -151,22 +154,31 @@ body {
 
 
 /* =========================================
-   GENERAL CARDS
+   GENERAL CARDS (HOME, ONDERHOUD, DIAGNOSE)
 ========================================= */
 
-.card {
+.card,
+.home-card,
+.symptom-card {
     background: rgba(0,0,0,0.55);
     padding: 20px;
-    margin: 15px auto;
-    width: 90%;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0,0,0,0.6);
     backdrop-filter: blur(6px);
+    transition: 0.2s;
 }
 
-.card h3 {
+.card h3,
+.home-card h3,
+.symptom-card h3 {
     margin-top: 0;
     color: #ff6600;
+}
+
+.home-card:hover,
+.symptom-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,102,0,0.2);
 }
 
 
