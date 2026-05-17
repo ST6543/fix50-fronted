@@ -6,58 +6,72 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="index-bg">
 
-<header>
-    <img src="logo.png" alt="Fix50 Logo">
+<header class="topbar">
+    <span class="logo-text">Fix50</span>
 </header>
 
-<div class="form-container">
-    <h2>Account aanmaken</h2>
+<section class="hero">
+    <h1>Account aanmaken</h1>
+    <p>Maak een nieuw Fix50 account.</p>
+</section>
 
+<div class="form-card">
     <input id="email" type="email" placeholder="E-mail">
     <input id="password" type="password" placeholder="Wachtwoord">
+    <input id="password2" type="password" placeholder="Herhaal wachtwoord">
 
     <button onclick="register()">Registreren</button>
 
-    <p>Heb je al een account? <a href="login.html">Inloggen</a></p>
-    <p id="message"></p>
+    <p id="reg-msg"></p>
+
+    <p style="text-align:center; margin-top:10px;">
+        Al een account? <a href="login.html" style="color:#ff6600;">Inloggen</a>
+    </p>
 </div>
 
 <script>
-const API_BASE = "https://fix50.onrender.com"; // JUISTE BACKEND
-
 async function register() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    const msg = document.getElementById("message");
+    const password2 = document.getElementById("password2").value.trim();
+    const msg = document.getElementById("reg-msg");
 
-    msg.innerText = "";
+    msg.textContent = "";
+    msg.style.color = "red";
 
-    if (!email || !password) {
-        msg.innerText = "Vul alle velden in.";
+    if (!email || !password || !password2) {
+        msg.textContent = "Vul alle velden in.";
+        return;
+    }
+
+    if (password !== password2) {
+        msg.textContent = "Wachtwoorden komen niet overeen.";
         return;
     }
 
     try {
-        const res = await fetch(`${API_BASE}/api/register`, {
+        const res = await fetch("https://fix50.onrender.com/api/auth/register", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ email, password })
         });
 
         const data = await res.json();
 
-        if (!res.ok) {
-            msg.innerText = data.error || "Er ging iets mis.";
-            return;
-        }
+        if (!res.ok) throw new Error(data.error || "Registratie mislukt");
 
-        alert("Account aangemaakt!");
-        window.location.href = "login.html";
+        msg.style.color = "green";
+        msg.textContent = "Account aangemaakt! Je wordt ingelogd...";
+
+        // Automatisch inloggen
+        localStorage.setItem("token", data.token);
+
+        setTimeout(() => location.href = "scooter.html", 500);
 
     } catch (err) {
-        msg.innerText = "Server niet bereikbaar.";
+        msg.textContent = err.message;
     }
 }
 </script>
