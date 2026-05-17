@@ -1,58 +1,42 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <title>Scooters - Fix50</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Mijn scooters</title>
 </head>
-
 <body>
 
-<!-- LOGIN CHECK -->
-<script>
-  if (!localStorage.getItem("token")) {
-    window.location.href = "login.html";
-  }
-</script>
+  <h1>Mijn scooters</h1>
 
-<!-- NIEUWE STRAKKE HEADER -->
-<header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" alt="Fix50 logo" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
+  <div>
+    <input id="naam" placeholder="Naam scooter">
+    <input id="kenteken" placeholder="Kenteken">
+    <input id="km" type="number" placeholder="Kilometerstand">
+    <button type="button" onclick="saveScooter()">Opslaan</button>
+    <p id="message"></p>
+  </div>
 
-    <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="scooter.html">Scooters</a>
-        <a href="onderhoud.html">Onderhoud</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="login.html" onclick="localStorage.removeItem('token')">Logout</a>
-    </nav>
-</header>
+  <h2>Overzicht</h2>
+  <div id="scooter-list"></div>
 
-<section class="content">
+  <div id="edit-popup" style="display:none;">
+    <h3>Scooter bewerken</h3>
+    <input id="edit-id" type="hidden">
+    <input id="edit-naam" placeholder="Naam">
+    <input id="edit-kenteken" placeholder="Kenteken">
+    <input id="edit-km" type="number" placeholder="Kilometerstand">
+    <button type="button" onclick="updateScooter()">Opslaan</button>
+    <button type="button" onclick="document.getElementById('edit-popup').style.display='none'">Annuleren</button>
+  </div>
 
-    <h2 class="page-title">Scooter toevoegen</h2>
+  <!-- BELANGRIJK: script.js MOET HIER STAAN -->
+  <script src="script.js"></script>
 
-    <div class="form-container">
-        <input id="naam" placeholder="Scooter naam">
-        <input id="kenteken" placeholder="Kenteken">
-        <input id="km" placeholder="Kilometers" type="number">
-        <button onclick="saveScooter()">Opslaan</button>
-        <p id="message"></p>
-    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadScooters();
+    });
+  </script>
 
-    <h2 class="page-title">Jouw scooters</h2>
-
-    <div id="scooter-list"></div>
-
-</section>
-
-<!-- BEWERKEN POPUP -->
-<div id="edit-popup" class="popup" style="display:none;">
-    <div class="popup-content">
-        <h3>Scooter bewerken</h3>
-
-        <input id="edit-naam" placeholder="Nieuwe naam">
-        <input id="edit-kenteken" placeholder="Nieuw kenteken">
+</body>
+</html>
