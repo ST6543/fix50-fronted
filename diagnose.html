@@ -25,35 +25,108 @@
     <p>Kies een symptoom om te beginnen.</p>
 </section>
 
-<div class="home-grid">
+<div class="symptom-cards home-grid">
 
-    <div class="home-card" onclick="startWizard('start-niet')">
+    <div class="home-card" onclick="startDiagnosis('Start niet')">
         <h3>Start niet</h3>
         <p>Motor draait niet of slaat niet aan.</p>
     </div>
 
-    <div class="home-card" onclick="startWizard('valt-uit')">
-        <h3>Valt uit</h3>
-        <p>Scooter stopt tijdens het rijden.</p>
+    <div class="home-card" onclick="startDiagnosis('Slaat af bij gas geven')">
+        <h3>Slaat af bij gas geven</h3>
+        <p>Motor valt uit zodra je gas geeft.</p>
     </div>
 
-    <div class="home-card" onclick="startWizard('slecht-trekken')">
-        <h3>Slecht optrekken</h3>
-        <p>Vermogen of snelheid ontbreekt.</p>
+    <div class="home-card" onclick="startDiagnosis('Loopt slecht stationair')">
+        <h3>Loopt slecht stationair</h3>
+        <p>Onrustig of bijna uitvallen op stationair.</p>
     </div>
 
-    <div class="home-card" onclick="startWizard('raar-geluid')">
-        <h3>Raar geluid</h3>
-        <p>Tikken, ratelen of schrapen.</p>
+    <div class="home-card" onclick="startDiagnosis('Rijdt niet harder dan 20–30 km/h')">
+        <h3>Rijdt niet harder dan 20–30 km/h</h3>
+        <p>Weinig snelheid, veel toeren.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Tikkend/ratelend geluid')">
+        <h3>Tikkend/ratelend geluid</h3>
+        <p>Onbekend geluid uit motor of aandrijving.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Rookt extreem')">
+        <h3>Rookt extreem</h3>
+        <p>Veel rook uit de uitlaat.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Trilt bij optrekken')">
+        <h3>Trilt bij optrekken</h3>
+        <p>Trillingen bij wegrijden.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Ploffend geluid / backfire')">
+        <h3>Ploffend geluid / backfire</h3>
+        <p>Ploffen uit uitlaat of inlaat.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Wordt te warm')">
+        <h3>Wordt te warm</h3>
+        <p>Motor of blok wordt snel heet.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Slaat af stationair maar rijdt goed')">
+        <h3>Slaat af stationair maar rijdt goed</h3>
+        <p>Valt uit bij stilstand, rijdt verder prima.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Verliest vermogen warm')">
+        <h3>Verliest vermogen warm</h3>
+        <p>Na opwarmen minder kracht.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Onregelmatig vonkbeeld')">
+        <h3>Onregelmatig vonkbeeld</h3>
+        <p>Vonk soms weg of zwak.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Koppeling pakt laat')">
+        <h3>Koppeling pakt laat</h3>
+        <p>Veel gas nodig voordat hij rijdt.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Scooter schokt bij optrekken')">
+        <h3>Scooter schokt bij optrekken</h3>
+        <p>Schokken bij de eerste meters.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Hoge toeren maar geen snelheid')">
+        <h3>Hoge toeren maar geen snelheid</h3>
+        <p>Gillen, maar weinig vooruitgang.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Benzine loopt uit carburateur')">
+        <h3>Benzine loopt uit carburateur</h3>
+        <p>Druppels of lekkage onder de scooter.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Scooter houdt in bij half gas')">
+        <h3>Scooter houdt in bij half gas</h3>
+        <p>Inhouden rond halve gasstand.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Geen reactie op gas')">
+        <h3>Geen reactie op gas</h3>
+        <p>Reageert niet of nauwelijks op gas.</p>
+    </div>
+
+    <div class="home-card" onclick="startDiagnosis('Scooter valt uit bij regen')">
+        <h3>Scooter valt uit bij regen</h3>
+        <p>Problemen vooral bij nat weer.</p>
     </div>
 
 </div>
 
-<script>
-function startWizard(symptoom) {
-    alert("Diagnose start voor: " + symptoom);
-}
-</script>
+<div id="wizard" class="hidden"></div>
 
+<script src="diagnoseData.js"></script>
+<script src="diagnoseFlow.js"></script>
 </body>
 </html>
