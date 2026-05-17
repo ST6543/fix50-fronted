@@ -2,18 +2,14 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Scooters – Fix50</title>
+    <title>Scooterbeheer – Fix50</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="scooter.css">
 </head>
 
-<body>
+<body class="index-bg">
 
 <header class="topbar">
-    <a href="index.html" class="logo-container">
-        <img src="logo.png" class="logo">
-        <span class="logo-text">Fix50</span>
-    </a>
+    <span class="logo-text">Fix50</span>
 
     <nav class="nav-links">
         <a href="index.html">Home</a>
@@ -24,45 +20,42 @@
     </nav>
 </header>
 
-<section class="page-container">
-
-    <h1 class="title">Scooter toevoegen</h1>
-
-    <div class="form-card">
-        <input id="naam" placeholder="Scooter naam">
-        <input id="kenteken" placeholder="Kenteken">
-        <input id="km" placeholder="Kilometerstand" type="number">
-
-        <select id="type">
-            <option value="2T">2‑takt</option>
-            <option value="4T">4‑takt</option>
-        </select>
-
-        <button onclick="saveScooter()">Opslaan</button>
-        <p id="message"></p>
-    </div>
-
-    <h1 class="title">Jouw scooters</h1>
-
-    <div id="scooter-list" class="scooter-grid"></div>
-
+<section class="hero">
+    <h1>Scooterbeheer</h1>
+    <p>Beheer al je scooters overzichtelijk op één plek.</p>
 </section>
 
-<!-- BEWERKEN POPUP -->
+<div class="form-card">
+    <h3 style="color:#ff6600; text-align:center;">Nieuwe scooter toevoegen</h3>
+
+    <input id="naam" placeholder="Naam scooter">
+    <input id="kenteken" placeholder="Kenteken">
+    <input id="km" type="number" placeholder="Kilometerstand">
+    <select id="type">
+        <option value="">Kies type</option>
+        <option value="2T">2-Takt</option>
+        <option value="4T">4-Takt</option>
+    </select>
+
+    <button onclick="saveScooter()">Opslaan</button>
+    <p id="message"></p>
+</div>
+
+<div id="scooter-list" class="scooter-grid"></div>
+
+<!-- Popup -->
 <div id="edit-popup" class="popup hidden">
     <div class="popup-content">
-        <h2>Scooter bewerken</h2>
+        <h3 style="color:#ff6600;">Scooter bewerken</h3>
 
+        <input id="edit-id" type="hidden">
         <input id="edit-naam" placeholder="Naam">
         <input id="edit-kenteken" placeholder="Kenteken">
-        <input id="edit-km" placeholder="Kilometerstand" type="number">
-
+        <input id="edit-km" type="number" placeholder="Kilometerstand">
         <select id="edit-type">
-            <option value="2T">2‑takt</option>
-            <option value="4T">4‑takt</option>
+            <option value="2T">2-Takt</option>
+            <option value="4T">4-Takt</option>
         </select>
-
-        <input type="hidden" id="edit-id">
 
         <button onclick="updateScooter()">Opslaan</button>
         <button class="danger" onclick="closePopup()">Annuleren</button>
@@ -70,7 +63,5 @@
 </div>
 
 <script src="script.js"></script>
-<script>loadScooters();</script>
-
 </body>
 </html>
