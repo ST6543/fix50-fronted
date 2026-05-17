@@ -1,5 +1,5 @@
 // JUISTE BACKEND-URL
-const API_URL = "https://fix50-backend-login-en-registratie.onrender.com";
+const API_URL = "https://fix50.onrender.com";
 
 // Token ophalen
 function getToken() {
