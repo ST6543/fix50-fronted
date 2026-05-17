@@ -16,22 +16,38 @@
 .form-card {
     background: #1a1a1a;
     border: 2px solid #ff6600;
-    padding: 18px;
+    padding: 14px;              /* was 25–30 → nu veel compacter */
     border-radius: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;        /* minder ruimte eronder */
 }
 
 .form-card input,
 .form-card select {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 8px;               /* was 12–14 → kleiner */
+    margin-bottom: 8px;         /* minder ruimte tussen velden */
     border-radius: 6px;
     border: none;
     background: #111;
     color: white;
-    font-size: 15px;
+    font-size: 14px;            /* iets kleiner */
 }
+
+.form-card button {
+    width: 100%;
+    background: #ff6600;
+    padding: 10px;              /* was 14–16 → kleiner */
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.form-card button:hover {
+    background: #ff7f2a;
+}
+
 
 .form-card button {
     width: 100%;
