@@ -22,35 +22,31 @@
 
 <section class="hero">
     <h1>Onderhoudsplanner</h1>
-    <p>Bekijk wanneer je scooter onderhoud nodig heeft.</p>
+    <p>Vul je kilometers in en ontvang automatisch onderhoudsadvies.</p>
 </section>
 
-<div class="home-grid">
-    <div class="home-card">
-        <h3>Olie verversen</h3>
-        <p>Elke 3000 km of 6 maanden.</p>
-    </div>
+<!-- KM INVOER -->
+<div class="form-card">
+    <h3 style="color:#ff6600; text-align:center;">Onderhoud instellen</h3>
 
-    <div class="home-card">
-        <h3>Bougie vervangen</h3>
-        <p>Elke 5000 km of 12 maanden.</p>
-    </div>
+    <input id="kmPerDag" type="number" placeholder="Hoeveel km rijd je per dag?">
+    <button onclick="berekenOnderhoud()">Bereken onderhoud</button>
 
-    <div class="home-card">
-        <h3>V-snaar controleren</h3>
-        <p>Elke 6000 km.</p>
-    </div>
-
-    <div class="home-card">
-        <h3>Luchtfilter reinigen</h3>
-        <p>Elke 3000 km.</p>
-    </div>
-
-    <div class="home-card">
-        <h3>Remmen controleren</h3>
-        <p>Elke 2000 km.</p>
-    </div>
+    <p id="onderhoud-msg"></p>
 </div>
+
+<!-- RESULTATEN -->
+<div id="onderhoud-resultaten" class="home-grid"></div>
+
+<!-- MAIL SIMULATIE -->
+<div id="mail-simulatie" class="diagnose-container hidden">
+    <h2>📧 Onderhoudsmelding verstuurd</h2>
+    <p>Fix50 heeft een onderhoudsherinnering naar jouw e-mail gestuurd.</p>
+    <p style="color:#ff6600;">(Simulatie voor je docent — geen echte mail)</p>
+</div>
+
+<script src="script.js"></script>
+<script src="onderhoudLogic.js"></script>
 
 </body>
 </html>
